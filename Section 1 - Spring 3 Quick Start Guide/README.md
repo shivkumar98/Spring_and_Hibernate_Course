@@ -317,9 +317,9 @@ server-port:8089
 
 # 🧠 1.9 Spring Boot Starters
 
-## What is a Spring Boot Starter?
+## 🟦 What is a Spring Boot Starter?
 
-* 🎃Spring Boot Starters are a **list of curated Maven dependencies** from the Spring Team which simplifies the problem for the developers of which Spring dependencies they should download!🎃
+* 🎃 Spring Boot Starters are a **list of curated Maven dependencies** from the Spring Team which simplifies the problem for the developers of which Spring dependencies they should download!🎃
 
 ## Spring Boot Starter - Web
 
@@ -348,3 +348,32 @@ server-port:8089
 * ✅  We can view all the dependencies of our project in intelliJ by navigating to `View -> Tool Windows -> Maven -> Your project -> Dependencies` ✅
 
     <img  width="250px" src="screenshots/2023-03-26-14-52-53.png">
+
+<br>
+
+# 🧠 1.10 Spring Boot Starter Parent
+
+## What is a Spring Boot Starter Parent 
+
+* 🎃 Spring Boot provides a Starter Parent - a special starter which provides Maven defaults 🎃
+
+* We can see this near the top of our POM:
+
+```xml
+<parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.0.5</version>
+    <relativePath/> <!-- lookup parent from repository -->
+</parent>
+```
+
+* We can override a Maven default by specifying a property. E.g., we set the Java version to 17:
+
+```xml
+<name>mycoolapp</name>
+<description>Demo project for Spring Boot</description>
+<properties>
+    <java.version>17</java.version>
+</properties>
+```
