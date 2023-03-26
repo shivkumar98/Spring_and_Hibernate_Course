@@ -22,13 +22,13 @@
 
 ## 🟦 FAQs
 
-1) Does Spring boot replace Spring MVC, Spring Rest
+1) **Does Spring boot replace Spring MVC, Spring Rest?**
 
     A: No! Spring uses these depenendencies!
 
     <img  width="300px" src="screenshots/2023-03-26-10-51-37.png">
 
-2) Is Spring Boot faster?
+2) **Is Spring Boot faster?**
 
     A: No!
 
@@ -54,7 +54,7 @@
 
 * I import in the project into eclipse!
 
-## 🟦 Code Demo
+## 🖥️ Code Demo 🖥️
 
 * I click `File -> Open` and select the POM of the unzipped file. I click the build icon and then `Right Click -> Run 'Mycoolappp...(main)`
 
@@ -81,12 +81,15 @@
 
 # 🧠 1.3 Creating a REST Controller
 
+## 🟦 Plan
+
 * We will create a REST controller, so it will display:
-<img  width="300px" src="screenshots/2023-03-26-11-12-30.png">
+
+    <img  width="300px" src="screenshots/2023-03-26-11-12-30.png">
 
 * The plan is:
 
-<img  width="300px" src="screenshots/2023-03-26-12-40-03.png">
+    <img  width="300px" src="screenshots/2023-03-26-12-40-03.png">
 
 ## 🖥️ Code Demo 🖥️
 
@@ -377,3 +380,8 @@ server-port:8089
     <java.version>17</java.version>
 </properties>
 ```
+
+
+<br>
+
+# 🧠 1.10 Spring Boot Starter Parent
