@@ -1,0 +1,34 @@
+p,ol{
+    font:sans-serif;
+    font-size:14px;
+
+}   
+h1 {font: sans-serif;
+font: size 23px;
+font-weight:bold;
+color:rgb(226, 111, 226)}
+h2 {font: sans-serif;
+font-size:22px;
+font-weight:bold;
+color: rgb(87, 126, 235)}
+h3 {font: sans-serif;
+font-size:18px;
+font-weight:bold;
+color: rgb(216, 122, 122);
+}
+h4 {
+    font: sans-serif;
+    font-size:18px;
+font-weight:bold;
+color:  rgb(216, 156, 103) ;
+}
+
+.example {
+    font-size: 18px;
+    color: rgb(216, 156, 103) ;
+}
+
+body{
+    background-color: rgb(37, 37, 37);
+    font-size:12pt
+}
