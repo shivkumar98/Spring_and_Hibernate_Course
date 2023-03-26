@@ -519,3 +519,36 @@ management.endpoints.web.exposure.include=*
 ```
 
 * We can then look at all the Beans using /actuator/beans endpoint!
+
+* The /actuator/threaddumps displays all the threads of your application.
+
+* The /actuator/mappings displays all the mappings of the app
+
+
+<br>
+
+# 🧠 1.14 Spring Boot Actuator Security
+
+* We do not want to expose all the endpoints to the public!
+
+* ✅ We add the Spring Security dependency: ✅
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot<groupId>
+    <artifactId>spring-boot-starter-secutriy<artifactId>
+</dependency>
+```
+
+* Spring security will now enforce a login to access the actuator endpoints.
+
+* There is a default user of `user` and a password generated in the console.
+
+* We can override this user be specifying a username/password in `application.properties`:
+
+```properties
+spring.security.user.name=shiv
+spring.security.user.password=pass
+```
+
+* Now ALL pages will require a login
