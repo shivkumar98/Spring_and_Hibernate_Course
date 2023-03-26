@@ -88,7 +88,7 @@
 
 <img  width="300px" src="screenshots/2023-03-26-12-40-03.png">
 
-## 🟦 Code Demo
+## 🖥️ Code Demo 🖥️
 
 * I define a new package and class:
 
@@ -312,3 +312,39 @@ server-port:8089
 * We can place our unit-testing files in `src/test/java`:
 
     <img  width="250px" src="screenshots/2023-03-26-14-24-16.png">
+
+<br>
+
+# 🧠 1.9 Spring Boot Starters
+
+## What is a Spring Boot Starter?
+
+* 🎃Spring Boot Starters are a **list of curated Maven dependencies** from the Spring Team which simplifies the problem for the developers of which Spring dependencies they should download!🎃
+
+## Spring Boot Starter - Web
+
+* Spring Boot provides one of these starters:
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+```
+
+* This dependency contains:
+
+    - spring-web
+    - spring-webmvc
+    - hibernate-validator
+    - json
+    - tomcat
+    - ...
+
+* ✅ To get this starter from spring.io, you just need to select the "Spring Web" dependency: ✅
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img  width="350px" src="screenshots/2023-03-26-14-35-34.png">
+
+* ✅  We can view all the dependencies of our project in intelliJ by navigating to `View -> Tool Windows -> Maven -> Your project -> Dependencies` ✅
+
+    <img  width="250px" src="screenshots/2023-03-26-14-52-53.png">
