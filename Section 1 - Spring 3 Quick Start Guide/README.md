@@ -83,4 +83,136 @@ public class MycoolappApplication {
 
 ![](2023-03-26-11-12-30.png)
 
+* The plan is:
 
+![](2023-03-26-12-40-03.png)
+
+### Code Demo
+
+* I define a new package and class:
+
+![](2023-03-26-12-42-36.png)
+
+* I write the following:
+
+```java
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class FunRestController {
+
+    @GetMapping("/")
+    public String sayHello(){
+        return "Hello World!";
+    }
+}
+```
+
+* I run my application from the main method. And go to localhost:8080/
+
+![](2023-03-26-12-44-42.png)
+
+<br>
+
+##  1.4 Spring Framework Overview
+
+### Goals of Spring
+
+* Lightweight development with POJO
+
+* Dependency injection to encourage loose-coupling
+
+* Minimise boiler-plating
+
+* AOP: add functionality such as logging, security and transactions in a declarative manner
+
+* Support for TDD ans mocking objects outside of the container
+
+### Data Access Layer
+
+* JDBC - reduces amount of code by 50%
+
+* ORM - objection-relational mapping
+
+* Transaction support on methods
+
+<br>
+
+##  1.5 Spring Projects
+
+* These are additional modules built on top of the core Spring framework
+
+* There are many projects such as cloud, data, security
+
+<br>
+
+##  1.6 What is Maven
+
+* Spring Initializr can generate a Maven project for you
+
+### What is Maven?
+
+* A popular tool for dependency and build management.
+
+* Let's us download additional dependencies without manual intervention.
+
+* Maven makes the JAR files available during compilation/run
+
+### How Maven works:
+
+* Maven will look at your project configuration file
+
+* It will check if your local repo, if it is not present it will download the dependencies from the Maven Central Repo and place it in your local repo!
+
+* Maven will then use your local repo to build the project
+
+![](2023-03-26-13-06-34.png)
+
+* Maven willa also download supporting dependencies for the dependencies!
+
+* Maven will handle class/build path for you
+
+<br>
+
+##  1.6 Maven Project Structure
+
+* Maven uses a standard project structure which encourages uniformity between developers!
+
+* IDEs support Maven out the box, we can also move the project around different IDEs
+
+![](2023-03-26-13-09-21.png)
+
+* Java code is stored in src/main/java
+
+* Any web resources are placed in src/main/resources
+
+<br>
+
+##  1.6 Maven Project Structure
+
+### POM File
+
+* The POM is the Project Object Model file located in root of project! ✅
+
+![](2023-03-26-13-19-33.png)
+
+* The POM contains metadata (version, output file type), dependencies and custom task plugins
+
+### Simple POM File
+
+![](2023-03-26-13-21-24.png)
+
+### Project Coordinates
+
+* A project coordinate is a way to uniquely identify a project.
+
+* The project coordinate consists of:
+
+    - **Group ID**: the name of organisation or company. E.g. `com.luv2code`
+
+    - **Artifact ID**: the name of the project
+
+    - **Version**: specific release version. E.g. `1.0` or `1.0-SNAPSHOT`
+
+![](2023-03-26-13-24-18.png)
