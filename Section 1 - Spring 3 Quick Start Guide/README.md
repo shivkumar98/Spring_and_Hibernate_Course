@@ -356,7 +356,7 @@ server-port:8089
 
 # 🧠 1.10 Spring Boot Starter Parent
 
-## What is a Spring Boot Starter Parent 
+## 🟦 What is a Spring Boot Starter Parent 
 
 * 🎃 Spring Boot provides a Starter Parent - a special starter which provides Maven defaults 🎃
 
@@ -411,6 +411,8 @@ server-port:8089
 
     <img  width="350px" src="screenshots/2023-03-26-15-40-26.png">
 
+<br>
+
 # 🧠 1.12 Spring Boot Dev Tools - Demo
 
 * I create a new copy of Spring project [here](/Section%201%20-%20Spring%203%20Quick%20Start%20Guide/demo%203%20-%20Using%20spring%20dev%20tools/)
@@ -429,7 +431,7 @@ server-port:8089
 
 * The console shows that the server has restarted and navigating to localhost:8080/workout:
 
-    ![](2023-03-26-15-53-02.png)
+    <img  width="250px" src="screenshots/2023-03-26-15-53-02.png">
 
 * Spring dev tools is working!!!
 
@@ -443,3 +445,77 @@ server-port:8089
     }
 ```
 
+<br>
+
+# 🧠 1.13 Spring Boot Actuator
+
+
+## 😞 Problem: 😞
+
+* How do I monitory and manage the application, check the health and access the application metrics?
+
+## 😊 Solution: 😊
+
+* 🎃The Spring Boot Actuator exposes endpoints to monitor and manage your application.🎃
+
+* ✅ In order to use the Spring Boot actuator, you need the following dependency ✅
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+```
+
+* This will automatically expose new end-points which you can visit in the browser!
+
+## 🟦 Health Endpoint
+
+* 🎃 This endpoint gives health of application 🎃
+
+* After adding the above dependency, I can navigate to localhost:8080/actuator/health. I get the following:
+
+    <img  width="250px" src="screenshots/2023-03-26-16-07-18.png">
+
+* This is exposed by default
+
+## 🟦 Info Endpoint
+
+* For the /info endpoint, we need to update our application.properties to include:
+
+```properties
+management.endpoints.web.exposure.include=health,info
+management.info.env.enabled=true
+```
+
+* 🎃 The /info endpoint gives you information on your app. By default it returns empty 🎃
+
+    <img  width="250px" src="screenshots/2023-03-26-16-10-40.png">
+
+* ✅ We can specify the info to return by updating the properties ✅
+
+* E.g., I add the following to my `application.properties` file:
+
+```properties
+info.app.name=Some cool application
+info.app.description=A crazy and fun app!!!
+info.app.version=1.0
+```
+
+* Going to the info endpoint now shows:
+
+    <img  width="250px" src="screenshots/2023-03-26-16-14-07.png">
+
+## 🟦 Spring Boot Actuator Endpoints
+
+* There are 10+ Spring Boot Actuator Endpoints, these include:
+
+    <img  width="250px" src="screenshots/2023-03-26-16-16-10.png">
+
+* 😏 We could expose all the actuator endpoints by using a wildcard in the `application.properties`:
+
+```properties
+management.endpoints.web.exposure.include=*
+```
+
+* We can then look at all the Beans using /actuator/beans endpoint!
