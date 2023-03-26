@@ -18,7 +18,7 @@
 
 * You can also deploy a WAR file to an external server, the WAR file excludes the server configuration.
 
-<img  width="300px" src="2023-03-26-10-50-40.png">
+    <img  width="300px" src="screenshots/2023-03-26-10-50-40.png">
 
 ## 🟦 FAQs
 
@@ -26,7 +26,7 @@
 
     A: No! Spring uses these depenendencies!
 
-    <img  width="300px" src="2023-03-26-10-51-37.png">
+    <img  width="300px" src="screenshots/2023-03-26-10-51-37.png">
 
 2) Is Spring Boot faster?
 
@@ -48,7 +48,7 @@
 
 * I have the following project setup:
 
-    <img  width="500px" src="2023-03-26-10-58-33.png">
+    <img  width="500px" src="screenshots/2023-03-26-10-58-33.png">
 
 * I unzip the folder into this directory [here](/Section%201%20-%20Spring%203%20Quick%20Start%20Guide/demo%201/mycoolapp/)
 
@@ -71,28 +71,28 @@
 
 * I run the application:
 
-<img  width="300px" src="2023-03-26-11-10-39.png">
+    <img  width="500px" src="screenshots/2023-03-26-11-10-39.png">
 
 * Going to localhost:8080 gives me:
 
-<img  width="300px" src="2023-03-26-11-11-13.png">
+    <img  width="300px" src="screenshots/2023-03-26-11-11-13.png">
 
 <br>
 
 # 🧠 1.3 Creating a REST Controller
 
 * We will create a REST controller, so it will display:
-<img  width="300px" src="2023-03-26-11-12-30.png">
+<img  width="300px" src="screenshots/2023-03-26-11-12-30.png">
 
 * The plan is:
 
-<img  width="300px" src="2023-03-26-12-40-03.png">
+<img  width="300px" src="screenshots/2023-03-26-12-40-03.png">
 
 ## 🟦 Code Demo
 
 * I define a new package and class:
 
-<img  width="300px" src="2023-03-26-12-42-36.png">
+<img  width="300px" src="screenshots/2023-03-26-12-42-36.png">
 
 * I write the following:
 
@@ -112,7 +112,7 @@ public class FunRestController {
 
 * I run my application from the main method. And go to localhost:8080/
 
-<img  width="300px" src="2023-03-26-12-44-42.png">
+<img  width="300px" src="screenshots/2023-03-26-12-44-42.png">
 
 <br>
 
@@ -168,7 +168,7 @@ public class FunRestController {
 
 * Maven will then use your local repo to build the project
 
-    <img  width="300px" src="2023-03-26-13-06-34.png">
+    <img  width="300px" src="screenshots/2023-03-26-13-06-34.png">
 
 * Maven willa also download supporting dependencies for the dependencies!
 
@@ -184,7 +184,7 @@ public class FunRestController {
 
 * IDEs support Maven out the box, we can also move the project around different IDEs
 
-    <img  width="300px" src="2023-03-26-13-09-21.png">
+    <img  width="300px" src="screenshots/2023-03-26-13-09-21.png">
 
 * Java code is stored in src/main/java
 
@@ -195,13 +195,13 @@ public class FunRestController {
 
 * The POM is the Project Object Model file located in root of project! ✅
 
-    <img  width="200px" src="2023-03-26-13-19-33.png">
+    <img  width="200px" src="screenshots/2023-03-26-13-19-33.png">
 
 * The POM contains metadata (version, output file type), dependencies and custom task plugins
 
 ## 🟦 Simple POM File
 
-<img  width="300px" src="2023-03-26-13-21-24.png">
+<img  width="300px" src="screenshots/2023-03-26-13-21-24.png">
 
 ## 🟦 Project Coordinates
 
@@ -215,4 +215,4 @@ public class FunRestController {
 
     - **Version**: specific release version. E.g. `1.0` or `1.0-SNAPSHOT`
 
-    <img  width="200px" src="2023-03-26-13-24-18.png">
+    <img  width="200px" src="screenshots/2023-03-26-13-24-18.png">
