@@ -384,4 +384,29 @@ server-port:8089
 
 <br>
 
-# 🧠 1.10 Spring Boot Starter Parent
+# 🧠 1.11 Spring Boot Dev Tools
+
+## 😞 Problem: 😞
+
+* If we make changes to our code, you must manually restart your application
+
+## 😊 Solution: 😊
+
+* Spring Boot Dev Tools will automatically restart your application when code is updated
+
+* ✅ We just need to add the following dependency to our POM file! ✅
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-devtools</artifactId>
+</dependency>
+```
+
+* IntelliJ does not support spring-devtools by default
+
+* We need to go to `Preferences > Build, Execution, Deployment > Compiler` and check `Build project automatically`
+
+* Additionally, we must see the `Advance Settings` in `Preferences` and under `Compiler`, check the following:
+
+    <img  width="350px" src="screenshots/2023-03-26-15-40-26.png">
