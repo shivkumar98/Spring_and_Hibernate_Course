@@ -216,3 +216,99 @@ public class FunRestController {
     - **Version**: specific release version. E.g. `1.0` or `1.0-SNAPSHOT`
 
     <img  width="200px" src="screenshots/2023-03-26-13-24-18.png">
+
+
+<br>
+
+# 🧠 1.8 Spring Boot Project Files
+
+## 🟦 The POM File:
+
+* Looking at the POM from our code:
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+```
+
+* We can see we have starter dependencies which are a collection of Spring dependencies
+
+* We also have the following plugins:
+
+```xml
+<plugins>
+    <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+    </plugin>
+</plugins>
+```
+
+* We have a Maven plugin which enables us to download the dependencies using mvn in the command line! E.g.
+
+```cmd
+./mvn package
+./mvn spring-boot:run
+```
+
+## 🟦 Application Properties
+
+* Spring Boot will load properties from `application.properties` which is empty at the beginning!
+
+    <img  width="250px" src="screenshots/2023-03-26-14-11-13.png">
+
+* Currently, it is an empty file 😲
+
+* We COULD use this file to instruct which port number to use. E.g. by writing:
+
+```properties
+server-port:8089
+```
+
+## 🟦 Reading from Application Properties
+
+* Suppose our application.properties is defined as:
+
+    <img  width="200px" src="screenshots/2023-03-26-14-15-13.png">
+
+* Then we can access the values within our Java code like so:
+
+```java
+    @RestController
+    public class FunRestController {
+        @Value("${coach.name}") 
+        private String coachName;
+    }
+```
+
+## 🟦 Static Content
+
+* Static resources like HTML, CSS, JavaScript, Images will be stored in the `src/main/resources/static` directory: 
+
+    <img  width="200px" src="screenshots/2023-03-26-14-18-10.png">
+
+⚠️ Most build tools will ignore the `src/main/webapp` if you generate a **JAR** file. Works fine with WAR file ⚠️
+
+## 🟦 Templates
+
+* Spring Boot includes auto-configuration for template engines like `FreeMarker`, `Thymelead` and `Mustache`.
+
+* By default Spring Boot will load templates from `src/main/resources/templates`
+
+    <img  width="200px" src="screenshots/2023-03-26-14-22-44.png">
+
+## 🟦 Unit Tests
+
+* We can place our unit-testing files in `src/test/java`:
+
+    <img  width="250px" src="screenshots/2023-03-26-14-24-16.png">
