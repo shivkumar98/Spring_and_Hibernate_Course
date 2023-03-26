@@ -410,3 +410,36 @@ server-port:8089
 * Additionally, we must see the `Advance Settings` in `Preferences` and under `Compiler`, check the following:
 
     <img  width="350px" src="screenshots/2023-03-26-15-40-26.png">
+
+# 🧠 1.12 Spring Boot Dev Tools - Demo
+
+* I create a new copy of Spring project [here](/Section%201%20-%20Spring%203%20Quick%20Start%20Guide/demo%203%20-%20Using%20spring%20dev%20tools/)
+
+* I run the main method in intelliJ and verify spring dev tools is working!
+
+* I add a new mapping in my FunRestController:
+
+```java
+// exposing a new endpoint for "workout"
+    @GetMapping("/workout")
+    public String getDailyWorkOut(){
+        return "Run a hard 5k!";
+    }
+```
+
+* The console shows that the server has restarted and navigating to localhost:8080/workout:
+
+    ![](2023-03-26-15-53-02.png)
+
+* Spring dev tools is working!!!
+
+* I define another endpoint:
+
+```java
+    // exposing a new endpoint for "fortune"
+    @GetMapping("/fortune")
+    public String getDailyFortune(){
+        return "Today is your lucky day!";
+    }
+```
+
