@@ -551,4 +551,87 @@ spring.security.user.name=shiv
 spring.security.user.password=pass
 ```
 
-* Now ALL pages will require a login
+* Currently, the health and info are accessible without login! This is default behaviour
+
+* We can exclude these by updating the `application.properties`:
+
+```properties
+management.endpoints.web.exposure.exclude=health,info
+```
+
+* Te `/actuator/info` and `/actuator/health` endpoints now require login permissions!
+
+* The `application.properties` file as a whole looks like:
+
+```properties
+management.endpoints.web.exposure.include=*
+management.info.env.enabled=true
+
+management.endpoints.web.exposure.exclude=health,info
+
+info.app.name=Some cool application
+info.app.description=A crazy and fun app!!!
+info.app.version=1.0
+
+spring.security.user.name=shiv
+spring.security.user.password=pass
+```
+
+
+<br>
+
+# 🧠 1.15 Run Spring Boot Apps from Command Line
+
+* We may want to run our application outside the IDE, one way to do this is to use the command line.
+
+* Since we are using Spring Boot, the server configuration is contained in a JAR file:
+
+    <img  width="250px" src="screenshots/2023-03-27-10-01-12.png">
+
+
+* There are 2 ways of running the application: using the Jar file with `java -jar mycoolapp.jar` or using the Spring Boot Maven plugin.
+
+* If we do not have Maven install then we execute the following commands:
+
+```console
+./mvnw package
+./mvnw spring-boot:run
+```
+
+* This uses the mvnw file in our project:
+
+    <img  width="250px" src="screenshots/2023-03-27-10-05-15.png">
+
+
+## 🖥️ Code Demo 🖥️
+
+* I navigated to the root of my project in explorer and started the command line
+
+* I executed the following command:
+
+```console
+./mvnw package
+```
+
+* But encountered a build failure:
+
+```
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.10.1:testCompile (default-testCompile) on project mycoolapp: Fatal error compiling: invalid target release: 17 -> [Help 1]
+```
+
+* I install Java 17 and update the path variable
+
+* I again run `./mvnw package` and the build is successful!
+
+* I then run `./mvwn spring-boot:run` and my application works
+
+* I also try running the app from the Jar. I navigate to the atarget file:
+
+```
+cd .\target
+java -jar .\mycoolapp-0.0.1-SNAPSHOT.jar
+```
+
+ * Again the application works!!
+
+ * NOTE: both using the `java -jar` and using the `./mvwn spring-boot:run` commands require you to first build the package using `./mvwn package` ⚠️ ⚠️ ⚠️
