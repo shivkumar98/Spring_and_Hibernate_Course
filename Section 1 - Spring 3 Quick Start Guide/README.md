@@ -681,3 +681,98 @@ team.name=The Mouse Club
 * I go to `localhost:8080/teaminfo`:
 
     <img  width="350px" src="screenshots/2023-03-27-11-46-42.png">
+
+ <br>
+
+# 🧠 1.18 Configuring Spring Boot Server - Overview
+
+* Spring Boot has over 1000 properties which are categorised as:
+
+    - Core
+    - Web
+    - Security
+    - Data
+    - Actuator
+    - Integration
+    - DevTools
+    - Testing
+
+## 🟦 Core Properties
+
+* We can set up logging severity:
+
+    ![](2023-03-27-11-53-04.png)
+
+* We can also specify where to put the logs:
+
+```properties
+logging-file=mylog.log
+```
+
+## 🟦 Web Properties
+
+* We can specify the server port number
+
+```properties
+server.port=7070
+```
+
+* The default application context path is `"/"`, but we can change this to `"/mysillyapp"` for example:
+
+```properties
+server.servlet.context-path=/mysillyapp
+```
+
+* We can also set the default HTTP Session time out
+
+```properties
+server.servlet.session.timeout=15m # 15 minutes
+``` 
+
+## 🟦 Actuator Properties
+
+* We can include and exclude the actuator endpoints:
+
+```properties
+management.endpoints.web.exposure.include=*
+management.endpoints.web.exposure.exclude=beans,mapping
+```
+
+* We can specify the base path for actuator:
+
+```properties
+management.endpoints.web.base-path=/actuator
+```
+
+## 🟦 Actuator Properties
+
+* We cans secure endpoints by specifying user and password:
+
+```properties
+spring.security.user.name=admin
+spring.security.password=topsecret
+```
+
+## 🟦 Data Properties
+
+* We can specify the JDBC URL, username and password:
+
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/ecommerce
+
+# username/password
+spring.datasource.username=shiv
+spring.datasource.password=root
+```
+
+## 🖥️ Code Demo 🖥️
+
+* I update the `application.properties` file:
+
+```properties
+# changing spring boot embedded server port
+server.port=7071
+
+# setting context path of application
+server.servlet.context-path=/mycoolapp
+```
