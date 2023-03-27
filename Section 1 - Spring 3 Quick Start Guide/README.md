@@ -635,3 +635,49 @@ java -jar .\mycoolapp-0.0.1-SNAPSHOT.jar
  * Again the application works!!
 
  * NOTE: both using the `java -jar` and using the `./mvwn spring-boot:run` commands require you to first build the package using `./mvwn package` ⚠️ ⚠️ ⚠️
+
+ <br>
+
+# 🧠 1.17 Injecting Custom Application Properties
+
+## 😞 Problem: 😞
+
+* We need to make the app configurable and not rely on hard-coded values!
+
+## 😊 Solution: 😊
+
+* We can use the `application.properties` file to define any custom properties we need to use within our Spring Boot application
+
+* We can access the properties using `@Value` annotation
+
+## 🖥️ Code Demo 🖥️
+
+* I create a new copy of the project [here](/Section%201%20-%20Spring%203%20Quick%20Start%20Guide/demo%205%20-%20Properties/04-properties-demo/)
+
+* I add the following custom properties in the `application.properties` file:
+
+```properties
+coach.name=Mickey Mouse
+team.name=The Mouse Club
+```
+
+* I add the following lines to my FunRestController:
+
+```java
+ // injecting properties for coach.name and team.name
+    @Value("${coach.name}")
+    private String coachName;
+
+    @Value("${team.name}")
+    private String teamName;
+
+    // new end points shows teamName and coachName injected values
+    @GetMapping("/teaminfo")
+    public String getTeamInfo(){
+        return "Coach: "+ coachName + ", Team: "+ teamName;
+    }
+```
+
+* I go to `localhost:8080/teaminfo`:
+
+    <img  width="350px" src="screenshots/2023-03-27-11-46-42.png">
