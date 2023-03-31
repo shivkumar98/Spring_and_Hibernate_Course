@@ -137,3 +137,69 @@ public class DemoController {
 * I run the Spring application:
     
     <img  width="300px" src="screenshots/2023-03-27-19-23-19.png">
+
+
+<br>
+
+## 📝 A Note about IDE Messages
+
+* IntelliJ may complain that a Component is not being used:
+
+    <img  width="300px" src="screenshots/2023-03-30-10-24-22.png">
+
+* Since Spring is dynamic, the IDE does not know when a component is actually be used until run-time 
+
+## 📝 Constructor Injection - Behind The Scenes
+
+* How does spring inject the necessary dependencies? Behind the scene, Spring is instantiating the class and injecting it into the controller!
+
+    <img  width="300px" src="screenshots/2023-03-30-10-27-24.png">
+
+<br>
+
+# 🧠 2.3  Component Scan
+
+* Spring will automatically scan Java classes for annotations
+
+* It will also register the bean automatically in the Spring Container
+
+* The Java class with the main method has a `@SpringBootApplication` annotation - this enables auto configuration and component scanning
+
+    <img  width="300px" src="screenshots/2023-03-30-14-09-41.png">
+
+
+* The `@SpringBootApplication` annotation is composed of the following annotations:
+
+1) `@EnableAutoConfiguration` - enables auto-configruation support
+
+2) `@ComponentScan` - enables component scanning of current package and subpackages
+
+3) `@Configruation` - allows registeration of extra bean with `@Bean` or other configuration classes
+
+* The main method also has an import for `SpringApplication` which lets you run the Spring Boot application:
+
+    <img  width="300px" src="screenshots/2023-03-30-14-13-49.png">
+
+* We should place any components in the same package or subpackages of the SpringBootApplication!
+
+* If we want to have components in other packages, we can define explicit packages to scan:
+
+```java
+    @SpringBootApplicastion(
+        scanBasePackages={"com.luv2code.springcoredemo",
+                        "com.luv2code.util",
+                        "org.acme.cart",
+                        "edu.cmu.srs"})
+    public class SpringcoredemoApplication {
+        // .... \\\
+    }
+```
+
+
+## 🖥️ Code Demo 🖥️
+
+* I created two sub packages:
+
+    ![](2023-03-30-14-33-41.png)
+
+    
