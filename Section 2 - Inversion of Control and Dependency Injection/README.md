@@ -202,4 +202,42 @@ public class DemoController {
 
     ![](2023-03-30-14-33-41.png)
 
-    
+* I moved the `Coach` and `CricketCoach` into the common package
+
+* I move the `DemoController` into the rest package:
+
+    ![](2023-04-02-15-35-29.png)
+
+
+* I build and run my application, and it still works:
+
+    ![](2023-04-02-15-36-55.png)
+
+*  I move the `Coach` and `CricketCoach` into a package outside the springcoredemo package:
+
+    ![](2023-04-02-15-38-48.png)
+
+* I build and run my application and the application fails to start:
+
+```console
+Parameter 0 of constructor in com.luv2code.springcoredemo.rest.DemoController required a bean of type 'com.luv2code.util.Coach' that could not be found.
+```
+
+* We must explicitly define the base packages to pass!
+
+* I add the =`scanBasePackages` to the SpringcoredemoApplication:
+
+```java
+    @SpringBootApplication(scanBasePackages = {"springcoredemo", "util"})
+    public class SpringcoredemoApplication {
+
+        public static void main(String[] args) {
+            SpringApplication.run(SpringcoredemoApplication.class, args);
+        }
+
+    }
+```
+
+* The application now runs without issue
+
+*  I move everything back to where they were!
