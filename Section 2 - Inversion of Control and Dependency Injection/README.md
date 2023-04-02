@@ -300,4 +300,31 @@ public class DemoController {
     public void injectMyDependency(Coach theCoach){
         coach = theCoach;
     }
+``` 
+
+
+
+<hr>
+
+# 🧠 2.5 Field Injection
+
+* Field injection is discouraged by Spring team! This makes code harder to unit test. This is popular in legacy code
+
+* 🎃Field injection is injecting dependencies by setting fields on your class directly - including private fields!🎃
+
+* This is achieved via Java Reflection❗❗❗
+
+* Field injection works by just applying the `@Autowired` annotation to a field:
+
+```java
+@RestController
+public class DemoController {
+
+    @Autowired
+    private Coach coach
+
+    // no need for setter or constructor
+
+    //...
+}
 ```
