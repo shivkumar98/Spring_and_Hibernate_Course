@@ -328,3 +328,98 @@ public class DemoController {
     //...
 }
 ```
+
+<hr>
+
+# 🧠 2.6 Qualifiers
+
+* Suppose we have multiple classes with the `@Component` annotation. Which one does spring inject? 🤔
+
+* Suppose we have 4 different components:
+
+    1) baseballCoach
+    2) cricketCoach
+    3) tennisCoach
+    4) trackCoach
+
+* If we attempt to run the application, we get the following error:
+
+    <img  width="300px" src="screenshots/2023-04-02-16-10-08.png">
+
+* We can get around this using the `@Qualifier` annotation by specifying the bean ID:
+
+```java
+@RestController
+public class DemoController {
+    private Coach myCoach;
+
+    // Constructor Injection: 
+    @Autowried
+    public DemoController(@Qualifier(" cricketCoach") Coach theCoach){
+        myCoach = theCoach
+    }
+
+    // ....
+}
+```
+
+* The bean ID is always the name of the component but the first character is lower case. 
+
+* We can also use `@Qualifier` for setter injection:
+
+```java
+@RestController
+public class DemoController {
+
+    private Coach myCoach;
+
+    // Setter injection:
+    @Autowired
+    public void setCoach(@Qualifier("cricketCoach") Coach theCoach){
+        myCoach = theCoach;
+    }
+}
+```
+
+
+## 🖥️ Code Demo 🖥️
+
+* I define 3 other coached which implement the `Coach` class:
+
+    <img  width="300px" src="screenshots/2023-04-02-16-20-41.png">
+
+* Running the application fails:
+
+```console
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in com.luv2code.springcoredemo.rest.DemoController required a single bean, but 4 were found:
+	- baseballCoach: defined in file 
+	- cricketCoach: defined in file 
+	- tennisCoach: defined in file 
+	- trackCoach: defined in file 
+
+Action:
+
+Consider marking one of the beans as @Primary, updating the consumer to accept multiple beans, or using @Qualifier to identify the bean that should be consumed
+
+
+Process finished with exit code 0
+```
+
+* I add the `@Qaulifier` annotation to the DemoController's constructor:
+
+```java
+    @Autowired
+    public DemoController(@Qualifier("baseballCoach") Coach theCoach){
+        coach = theCoach;
+    }
+```
+
+* Running the application works😊😊😊:
+
+    <img  width="300px" src="screenshots/2023-04-02-16-24-59.png">
