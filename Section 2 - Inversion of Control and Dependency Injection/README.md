@@ -423,3 +423,44 @@ Process finished with exit code 0
 * Running the application works😊😊😊:
 
     <img  width="300px" src="screenshots/2023-04-02-16-24-59.png">
+
+
+
+<hr>
+
+# 🧠 2.7 Primary
+
+* 🎃We can use the `@Primary` annotation on a Coach who we want to be our primary implementation to use🎃
+
+*  ❌You can not mark multiple classes with `@Primary`❌
+
+* Qualifier has higher priority!
+
+## 🖥️ Code Demo 🖥️
+
+* I remove the `@Qualifier` from the DemoController:
+
+```java
+    @Autowired
+    public DemoController(Coach theCoach){
+        coach = theCoach;
+    }
+```
+
+* I add the `@Primary` annotation to TennisCoach:
+
+```java
+    @Component
+    @Primary
+    public class TennisCoach implements Coach{
+
+        @Override
+        public String getDailyWorkout() {
+            return "Practice your volley!";
+        }
+    }
+```
+
+* Running the application:
+
+    <img  width="300px" src="screenshots/2023-04-02-16-33-11.png">
