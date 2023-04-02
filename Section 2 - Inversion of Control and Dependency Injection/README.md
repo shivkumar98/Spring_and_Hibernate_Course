@@ -538,3 +538,107 @@ spring.main.lazy-initialization=true
 * When we go to `http://localhost:8081/dailyworkout`, the console updates to:
 
     <img  width="700px" src="screenshots/2023-04-02-16-52-44.png">
+
+<hr>
+
+# 🧠 2.9 Bean Scope
+
+* 🎃Bean scope refers to lifeycle to the bean, how long it lives, how many instances are created and how is the bean shared🎃
+
+## Default Scope
+
+* The default scope for beans is **SINGLETON**
+
+* A Singleton means that the Spring Container creates on a single instance of the bean. It is cached in memory and all dependency injections will reference the same bean
+
+* E.g. suppose we were injecting the CricketCoach in two places:
+
+    <img  width="700px" src="screenshots/2023-04-02-16-58-33.png">
+
+* We can explicitly define the scope of a bean using the `@Scope` annotation✅
+
+```java
+@Component
+@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
+public class CricketCoach implements Coach {
+    // ...
+}
+```
+
+## Additional Spring Bean Scopes:
+
+1) **singleton**: single shared instance of bean
+
+2) **prototype**: creates a new bean instal for each container request
+
+3) **request**: scope to a HTTP web request
+
+4) **session**: scoped to HTTP web session
+
+5) **global-session**: scoped to global HTTP web session
+
+## Prototype Scope Example
+
+```java
+@Component
+@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+public class CricketCoach implements Coach {
+    // ...
+}
+```
+
+<img  width="700px" src="screenshots/2023-04-02-17-07-30.png">
+
+
+## 🖥️ Code Demo 🖥️
+
+* I add another Coach field to the DemoController:
+
+```java
+@RestController
+public class DemoController {
+
+    private Coach coach;
+    private Coach anotherCoach;
+
+
+    @Autowired
+    public DemoController(@Qualifier("cricketCoach") Coach theCoach, @Qualifier("cricketCoach") Coach anotherCoach){
+        System.out.println("in constructor"+getClass().getSimpleName());
+        coach = theCoach;
+        this.anotherCoach = anotherCoach;
+    }
+
+    // ...
+}
+```
+
+* I add a new get mapping which checks if the two fields are the same:
+
+```java
+    @GetMapping("/check")
+    public String check(){
+        return "Comparing beans: coach==anotherCoach "+ (coach==anotherCoach);
+    }
+```
+
+<img  width="700px" src="screenshots/2023-04-02-17-16-22.png">
+
+* We can see the coaches are the same
+
+* Let's change the bean scope for CricketCoach to prototype:
+
+```java
+    @Component
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public class CricketCoach implements Coach {
+
+        public CricketCoach(){
+            System.out.println("in constructor"+
+                    getClass().getSimpleName());
+        }
+```
+
+* Rerunning the app:
+
+<img  width="700px" src="screenshots/2023-04-02-17-18-21.png">
