@@ -155,7 +155,7 @@ public class DemoController {
 
     <img  width="300px" src="screenshots/2023-03-30-10-27-24.png">
 
-<br>
+<hr>
 
 # 🧠 2.3  Component Scan
 
@@ -241,3 +241,63 @@ Parameter 0 of constructor in com.luv2code.springcoredemo.rest.DemoController re
 * The application now runs without issue
 
 *  I move everything back to where they were!
+
+
+<hr>
+
+# 🧠 2.4  Setter Injection
+
+* Setter injection is injecting dependencies by calling the setter method of a class
+
+* We configure the injection using `@Autowired` annotation
+
+* We shall define a setter method `setCoach` in our DemoController and use the `@Autowired` annotation
+
+* The Spring framework will:
+
+    - Initialise the CricketCoach
+
+    - Initialise the DemoController
+    
+    - Set the coach using the cricketCoach
+
+* We are not limited to setters for dependency injection! 😱😱😱
+
+* Constructor inject is best for required dependencies and setter injection is best for optional dependencies
+
+
+
+## 🖥️ Code Demo 🖥️
+
+* I remove the old constructor injection from my DemoController:
+
+```java
+@RestController
+public class DemoController {
+
+    private Coach coach;
+
+    // Setter injection:
+    @Autowired
+    public void setCoach(Coach theCoach){
+        coach = theCoach;
+    }
+
+    @GetMapping("/dailyworkout")
+    public String getDailyWorkout(){
+        return coach.getDailyWorkout();
+    }
+}
+```
+
+* Again the application is still working! This confirms the app is utilising the setter injection
+
+* Even if we renamed the setter injection, the app will still function!!
+
+```java
+    // Setter injection:
+    @Autowired
+    public void injectMyDependency(Coach theCoach){
+        coach = theCoach;
+    }
+```
