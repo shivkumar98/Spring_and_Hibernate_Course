@@ -464,3 +464,77 @@ Process finished with exit code 0
 * Running the application:
 
     <img  width="300px" src="screenshots/2023-04-02-16-33-11.png">
+
+
+<hr>
+
+# 🧠 2.8 Lazy Initialisation
+
+* By default, all beans with `@Component` will be initialised!
+
+* 🎃`@Lazy` initialisation ensures that a bean is only initialised if needed for injection or explicitly requested🎃
+
+* We can make ALL beans lazy initialised by setting the following property to true:
+
+```properties
+spring.main.lazy-initialization=true
+```
+
+## 🖥️ Code Demo 🖥️
+
+* I add a message to be printed for each of the Coach classes:
+
+```java
+ public someCoach(){ // BaseballCoach, CricketCoach ... etc
+        System.out.println("in constructor"+
+                getClass().getSimpleName());
+    }
+```
+
+* I also add the same message to the DemoController's constructor:
+
+```java
+ @Autowired
+    public DemoController(@Qualifier("cricketCoach") Coach theCoach){
+        System.out.println("in constructor"+getClass().getSimpleName());
+        coach = theCoach;
+    }
+```
+
+* When running the application, we get the following in console:
+
+    <img  width="700px" src="screenshots/2023-04-02-16-47-19.png">
+
+* I add the `@Lazy` annotation to the TrackCoach class:
+
+```java
+    @Component
+    @Lazy
+    public class TrackCoach implements  Coach{
+
+        public TrackCoach(){
+            System.out.println("in constructor"+
+                    getClass().getSimpleName());
+        }
+        // ...
+}
+```
+
+* Rerunning the application gives the following:
+
+    <img  width="700px" src="screenshots/2023-04-02-16-50-07.png">
+
+* Let's set it globally to ensure lazy initialisation in our application.properties:
+
+```properties
+server.port=8081
+spring.main.lazy-initialization=true
+```
+
+* The console shows:
+
+    <img  width="700px" src="screenshots/2023-04-02-16-51-48.png">
+
+* When we go to `http://localhost:8081/dailyworkout`, the console updates to:
+
+    <img  width="700px" src="screenshots/2023-04-02-16-52-44.png">
