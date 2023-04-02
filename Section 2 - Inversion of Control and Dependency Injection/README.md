@@ -200,13 +200,13 @@ public class DemoController {
 
 * I created two sub packages:
 
-    ![](2023-03-30-14-33-41.png)
+    <img  width="300px" src="screenshots/2023-03-30-14-33-41.png">
 
 * I moved the `Coach` and `CricketCoach` into the common package
 
 * I move the `DemoController` into the rest package:
 
-    ![](2023-04-02-15-35-29.png)
+    <img  width="300px" src="screenshots/2023-04-02-15-35-29.png">
 
 
 * I build and run my application, and it still works:
@@ -215,7 +215,7 @@ public class DemoController {
 
 *  I move the `Coach` and `CricketCoach` into a package outside the springcoredemo package:
 
-    ![](2023-04-02-15-38-48.png)
+    <img  width="300px" src="screenshots/2023-04-02-15-38-48.png">
 
 * I build and run my application and the application fails to start:
 
@@ -225,7 +225,7 @@ Parameter 0 of constructor in com.luv2code.springcoredemo.rest.DemoController re
 
 * We must explicitly define the base packages to pass!
 
-* I add the =`scanBasePackages` to the SpringcoredemoApplication:
+* I add the `scanBasePackages` to the SpringcoredemoApplication:
 
 ```java
     @SpringBootApplication(scanBasePackages = {"springcoredemo", "util"})
