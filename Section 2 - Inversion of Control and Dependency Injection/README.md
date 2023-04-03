@@ -642,3 +642,59 @@ public class DemoController {
 * Rerunning the app:
 
 <img  width="700px" src="screenshots/2023-04-02-17-18-21.png">
+
+
+
+<hr>
+
+# 🧠 2.10 Bean Lifecycle Methods
+
+* Here is a high level overview of the Bean lifecycle:
+
+    <img  width="700px" src="screenshots/2023-04-03-15-27-01.png">
+
+## Bean Lifecycle Methods/Hooks
+
+* We can add custom code during Bean initialisation and destruction
+
+## Metho Configuration
+
+* We can use the `@PostConstruct` annotation to call a method after the Bean is initialised
+
+* We use `@PreDestroy` annotation to call a method before a Bean is destroyed
+
+
+## 🖥️ Code Demo 🖥️
+
+* I update the code for my CricketCoach class:
+
+```java
+@Component
+public class CricketCoach implements Coach {
+
+    public CricketCoach(){
+        System.out.println("in constructor"+
+                getClass().getSimpleName());
+    }
+
+    // defining init method
+    @PostConstruct
+    public void doMyStartupStuff(){
+        System.out.println("In doMyStartupStuff(): "+getClass().getSimpleName());
+    }
+
+    @PreDestroy
+    public void doMyCleanupStuff(){
+        System.out.println("In doMyCleanupStuff(): "+getClass().getSimpleName());
+    }
+
+    @Override
+    public String getDailyWorkout() {
+        return "Practice fast bowling for 15 mins";
+    }
+}
+```
+
+* Running and Closing my application gives the following logs:
+
+    <img  width="700px" src="screenshots/2023-04-03-15-35-51.png">
