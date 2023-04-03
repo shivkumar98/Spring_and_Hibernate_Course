@@ -698,3 +698,77 @@ public class CricketCoach implements Coach {
 * Running and Closing my application gives the following logs:
 
     <img  width="700px" src="screenshots/2023-04-03-15-35-51.png">
+
+
+
+<hr>
+
+# 🧠 2.11 Java Config Bean
+
+* We shall configure Beans using Java code!😲 We shall create a `SwimCoach` class and configurate it using pure Java code
+
+* We shall use the `@Configuration` annotation to define a Configuration class
+
+* We then use the `@Bean` annotation which will configure the Bean
+
+* We will then inject the Bean into the Controller using `@Qualifier`
+
+## Why Use @Bean Annotation?
+
+* Why use this annotation just to instantiate a class?
+
+* We may want to use a third-party class and expose it to the Spring framework. E.g. we could use AWS S3 as a Spring Bean in our code since this is part of the AWS SDK which we do not have access to!
+
+
+
+## 🖥️ Code Demo 🖥️
+
+* I define a `SwimCoach` class:
+
+```java
+public class SwimCoach implements Coach{
+
+    public SwimCoach(){
+        System.out.println("In constructor: "+getClass().getSimpleName());
+    }
+    @Override
+    public String getDailyWorkout() {
+        return "Swim 10000m";
+    }
+}
+```
+
+* Running the application displays:
+
+```properties
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in com.luv2code.springcoredemo.rest.DemoController required a bean of type 'com.luv2code.springcoredemo.common.Coach' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Qualifier("swimCoach")
+```
+
+* We COULD add the `@Component` annotation but lets create a cconfig class
+
+* I create a new package `config` and create a `SportConfig` class:
+
+```java
+@Configuration
+public class SportConfig {
+
+    @Bean
+    public Coach swimCoach(){
+        return new SwimCoach();
+    }
+}
+```
+
+* The name of the method with the @Bean annotation determines the Bean ID! We can arbritarily choose the Bean ID!
+
+* I can now run the application!!!
