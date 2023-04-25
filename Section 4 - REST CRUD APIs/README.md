@@ -1,10 +1,10 @@
 <link rel="stylesheet" href="../style.css" />
 
-# 🟪 Section 4 - Spring Boot 3 - REST CRUD APIs
+# 🟪 Section 3 - Spring Boot 3 - REST CRUD APIs
 
 
 
-# 🧠 4.1 Introduction
+# 🧠 3.1 Introduction
 
 In this section, we will be doing the following:
 
@@ -22,7 +22,7 @@ This will act as an introduction to Spring REST developmebt
 
 <br>
 
-# 🧠 4.2 REST Services
+# 🧠 3.2 REST Services
 
 ## 🟦 Coding scenario
 
@@ -74,7 +74,7 @@ api.openweathermap.org/data/2.5/weather?q={cityName},{countryCode}
 
 <br>
 
-# 🧠 4.3 Spring Boot REST HTTP Basics
+# 🧠 3.3 Spring Boot REST HTTP Basics
 
 ## 🟦 HTTP Methods
 
@@ -134,7 +134,7 @@ api.openweathermap.org/data/2.5/weather?q={cityName},{countryCode}
 
 <br>
 
-# 🧠 4.4 Postman Demo
+# 🧠 3.4 Postman Demo
 
 * I open a new tab in Postman and see this:
 
@@ -152,7 +152,7 @@ api.openweathermap.org/data/2.5/weather?q={cityName},{countryCode}
 
 
 
-# 🧠 4.5 Spring REST Controller
+# 🧠 3.5 Spring REST Controller
 
 ## 🟦 Coding Scenario
 
