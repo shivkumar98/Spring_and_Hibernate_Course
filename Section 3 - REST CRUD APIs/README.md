@@ -20,6 +20,8 @@ In this section, we will be doing the following:
 
 This will act as an introduction to Spring REST developmebt
 
+<br>
+
 # 🧠 2.2 REST Services
 
 ## 🟦 Coding scenario
@@ -68,6 +70,68 @@ api.openweathermap.org/data/2.5/weather?q={cityName},{countryCode}
 * Since the weather service returns data in a language format, we could create multiple client apps using Spring MVC, C#, iPhone... 😱
 
 * REST APIs go under multiple names including RESTful web services, Rest services, ... etc
+
+
+<br>
+
+# 🧠 2.3 Spring Boot REST HTTP Basics
+
+## 🟦 HTTP Methods
+
+* Most common use of REST is over HTTP, so we can leverage HTTP methods for CRUD operation
+
+| HTTP Method | CRUD Operation |
+|-------------|----------------|
+| `POST`      | Create a new entity |
+| `GET`       | Get a list of entities or a single entity |
+| `PUT`       | Update an existing entity |
+| `DELETE`    | Delete an existing entity |
+
+* We will send a HTTP Request Message to the server from the app, the server then sends a HTTP Response Message
+
+## 🟦 HTTP Request Message
+
+* A HTTP Request message consists of:
+
+1) Request Line - the HTTP command
+
+2) Header variables - metadata of request
+
+3) Message body - content of the message (this can be in the form of JSON)
+
+## 🟦 HTTP Response Message
+
+* The Response Message consists of:
+
+1) Response line: server protocol/status code
+
+2) Header variables: metadata of response
+
+3) Message body: contents of the message
+
+* The HTTP Response Status codes consist of:
+
+|  Code Range | Description |
+|------------|--------------|
+| 100-199    | Informational |
+| 200-299    | Success      |
+| 300-399    | Redirection |
+| 400-499    | Client Error |
+| 500-599    | Server Error |
+
+## 🟦 MIME Content Types
+
+* MIME - Multipurpose Internet Mail Extension, desribes the messagee format.
+
+* The syntax for this is `type/sub-type`, e.g. `text/html`, `text/plain` etc
+
+
+## 🟦 Client Tool
+
+* We need a tool to sent HTTP requests to the HTTP REST Service❗ There are multiple client tools available like Postman, Curl, ...
+
+* This course will use Postman!!! I download Postman from [here](https://www.postman.com/downloads/)
+
 
 
 <br>
