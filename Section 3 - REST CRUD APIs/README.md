@@ -132,7 +132,21 @@ api.openweathermap.org/data/2.5/weather?q={cityName},{countryCode}
 
 * This course will use Postman!!! I download Postman from [here](https://www.postman.com/downloads/)
 
+<br>
 
+# 🧠 3.4 Postman Demo
+
+* I open a new tab in Postman and see this:
+
+  <img  width="600px" src="screenshots/2023-04-25-13-42-13.png">
+
+* I visit **JSONPlaceholder** ([link](https://jsonplaceholder.typicode.com/)), which has URLs which return dummy JSON data
+
+* I use this URL which returns some users JSON: [https://jsonplaceholder.typicode.com/users](https://jsonplaceholder.typicode.com/users)
+
+* I make a GET request using the above link and see a list of JSON objects in Postman:
+
+    ![](2023-04-25-13-59-14.png)
 
 <br>
 
