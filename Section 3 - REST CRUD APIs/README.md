@@ -4,7 +4,7 @@
 
 
 
-# 🧠 2.1 Introduction
+# 🧠 3.1 Introduction
 
 In this section, we will be doing the following:
 
@@ -22,7 +22,7 @@ This will act as an introduction to Spring REST developmebt
 
 <br>
 
-# 🧠 2.2 REST Services
+# 🧠 3.2 REST Services
 
 ## 🟦 Coding scenario
 
@@ -74,7 +74,7 @@ api.openweathermap.org/data/2.5/weather?q={cityName},{countryCode}
 
 <br>
 
-# 🧠 2.3 Spring Boot REST HTTP Basics
+# 🧠 3.3 Spring Boot REST HTTP Basics
 
 ## 🟦 HTTP Methods
 
