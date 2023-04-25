@@ -146,9 +146,73 @@ api.openweathermap.org/data/2.5/weather?q={cityName},{countryCode}
 
 * I make a GET request using the above link and see a list of JSON objects in Postman:
 
-    ![](2023-04-25-13-59-14.png)
+    <img  width="600px" src="screenshots/2023-04-25-13-59-14.png">
 
 <br>
+
+
+
+# 🧠 3.5 Spring REST Controller
+
+## 🟦 Coding Scenario
+
+* We want to write a REST service such that when it gets a request for `/test/hello`, it sends a response to the client with `Hello World!`
+
+* We can define a REST Controller on a class:
+
+```java
+@RestController
+@RequestMapping("/test")
+public class DemoRestController {
+
+    @GetMapping("/hello")
+    public String sayHello(){
+        return "Hello World!";a
+    }
+}
+```
+
+* We can test our web service using the browser or Postman - Postman would be the best option when you have more complicated requests, have authentication, ... 
+
+## 🟦 Coding Demo
+
+* We need the following dependency to create a RESTful service:
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+```
+
+* I go to the Spring Initializr websit and setup the project:
+
+    <img  width="500px" src="screenshots/2023-04-25-14-27-18.png">
+
+
+* I create a new project [here](/Section%203%20-%20REST%20CRUD%20APIs/Demo%2014%20-%20Spring%20Rest%20Controller/demo-09-rest-crud/) and create a class in this package:
+
+    <img  width="400px" src="screenshots/2023-04-25-14-31-06.png">
+
+* I write the class as:
+
+```java
+@RestController
+@RequestMapping("/test")
+public class DemoRestController {
+
+    @GetMapping("/hello")
+    public String sayHello(){
+        return "Hello World!";
+    }
+}
+```
+
+* I run the Spring application and navigate to the endpoint:
+
+    <img  width="300px" src="screenshots/2023-04-25-14-37-12.png">
+
+* The app works as expected!
 
 ---
 
@@ -158,7 +222,7 @@ api.openweathermap.org/data/2.5/weather?q={cityName},{countryCode}
 
 ## 🟦 H2
 
-IMAGE:    <img  width="300px" src="screenshots/2023-03-27-18-46-20.png">
+IMAGE:    <img  width="600px" src="screenshots/2023-03-27-18-46-20.png">
 
 CHECKBOX ✅
 
