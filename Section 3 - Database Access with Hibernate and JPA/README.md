@@ -106,7 +106,7 @@ List<Student> listOfStudents = query.getResultList();
 
 * I can see the new user in the admin and privelleges page:
 
-    <img  width="300px" src="screenshots/2023-04-27-14-38-23.png">
+        <img  width="300px" src="screenshots/2023-04-27-14-38-23.png">
 
 * I create a new connection for the springstudent connection, and succesfully test the connection:
 
@@ -120,17 +120,100 @@ List<Student> listOfStudents = query.getResultList();
 
     <img  width="200px" src="screenshots/2023-04-27-14-41-40.png">
 
-* The database is now setup
+* The database is now setup!!!
+
+<br>
+
+# 🧠 3.3 Setting Up Spring Boot Project
+
+## 🟦 Automatic Data Source Configuration
+
+* ❗Hibernate is the default implementation of JPA❗
+
+* `EntityManager` from JPA is the main component for creating enquiries ✅
+
+* Based on configuration, Spring will create beans for `DataSource` and `EntityManager`
+
+* These can be injected into the app
+
+## 🟦 Setting Up Project
+
+* We shall use Spring Intitialzr to add dependencies for:
+    
+    - MySQL Driver `mysql-connecter-j` 👷
+    - Spring Data JPA `spring-boot-starter-data-jpa` 👷
+
+* Spring Boot will automatically configure data source for you and get the DB connection info from `application.properties` - which will contain url, username and passeword
+
+* We shall make a simple command line app to focus on JPA/Hibernate
+
+## 🟦 Code Demo
+
+* I go to spring initialzr and create the following project:
+
+![](2023-04-27-14-58-28.png)
+
+* I unzip the code folder [here](/demo-01-spring-hibernate-jpa-crud/)
+
+* I open up `CrudDemoApplication`:
+
+```java
+@SpringBootApplication
+public class CrudDemoApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(CrudDemoApplication.class, args);
+	}
+
+}
+```
+
+* I create a new Bean `CommandLineRunner` (from Spring Boot):
+
+```java
+@SpringBootApplication
+public class CrudDemoApplication {
+	public static void main(String[] args) {
+		SpringApplication.run(CrudDemoApplication.class, args);
+	}
+	@Bean
+	public CommandLineRunner commandLineRunner(String[] args){
+		return runner -> {
+			System.out.println("Hello World");
+		};
+	}
+}
+```
 
 
+* I update the `application.properties`:
 
+```properties
+# the port number comes from the connection in MySQL
+spring.datasource.url=jdbc:mysql://localhost:3306/student_tracker
+spring.datasource.username=springstudent
+spring.datasource.password=springstudent
+```
 
+* We can see that the application is running:
 
+    ![](2023-04-27-15-07-36.png)
+
+* ❗ We can switch off the spring boot banner from displaying in console with an additional property. We can also set the logging level to warn ❗
+
+```properties
+# disable spring banner
+spring.main.banner-mode=off
+
+# reduce logging level
+logging.level.root=warn
+```
 
 # 🧠 3.1 H1
 
 ## 🟦 H2
 ✅
+❗
 ❌
 🤔
 😊 
