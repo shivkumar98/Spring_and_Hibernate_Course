@@ -2,8 +2,6 @@
 
 # 🟪 Section 3 - Spring Boot 3 - Database Access with Hibernate/JPA CRUD
 
-
-
 # 🧠 3.1 Introduction
 
 ## 🟦 Overview
@@ -36,7 +34,7 @@ We shall go through the following topics:
 
 * The developer simply defines the mapping between the Java class and database table:
 
-![](2023-04-25-15-22-13.png)
+<img  width="500px" src="screenshots/2023-04-25-15-22-13.png">
 
 * These mappings can be made through XML, Java code or annotations
 
@@ -90,8 +88,44 @@ List<Student> listOfStudents = query.getResultList();
 
 * Hibernate/JPA uses JDBC for all database communications, its another layer of Abstraction!
 
-
 <br>
+
+# 🧠 3.2 Setting Up Database Table
+
+* I download MySQL Server using the Windows installer
+
+ * We shall setup the database using some starter files:
+
+    1) `01.create-user.sql`
+
+    2) `02-student-tracker.sql`
+
+* I take the folder [00-starter-sql-scripts](/00-starter-sql-scripts/) and copy it to a new demo folder ([here](/demo-01-spring-hibernate-jpa-crud/))
+
+* I open up the create user sql in MySQL workbench and executre the script.
+
+* I can see the new user in the admin and privelleges page:
+
+    <img  width="300px" src="screenshots/2023-04-27-14-38-23.png">
+
+* I create a new connection for the springstudent connection, and succesfully test the connection:
+
+    <img  width="500px" src="screenshots/2023-04-27-14-39-49.png">
+
+* I use the new connection, I look at the schema:
+
+    <img  width="200px" src="screenshots/2023-04-27-14-40-49.png">
+
+* I open up the student tracker SQL script and execute it. Checking the schema now:
+
+    <img  width="200px" src="screenshots/2023-04-27-14-41-40.png">
+
+* The database is now setup
+
+
+
+
+
 
 # 🧠 3.1 H1
 
