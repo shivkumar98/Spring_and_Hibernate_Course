@@ -259,8 +259,6 @@ public class Student {
 }
 ```
 
-
-
 ### 🟥 Generation Strategy
 
 * We have the following strategies:
@@ -325,6 +323,136 @@ public class Student {
 }
 ```
 
+<br>
+
+# 🧠 3.5 Saving a Java Object with JPA
+
+## 🟦 Student Data Access Object
+
+* Data Access Object (DAO) is a 😱design pattern😱 in which an object is responsible for interfacing with the database:
+
+![](2023-05-01-11-12-30.png)
+
+* Our Student DAO will have the following methods:
+
+| Methods   		|
+| ----------------- |
+| `save(...)` ✅  	 		|
+| `findById(...)` ✅ 		|
+| `findAll(...)` ✅		|
+| `findByLastName(...)` ✅ |
+| `update(...)` ✅		|
+| `delete(...)` ✅		|
+| `deleteAll(...)` ✅	|
+
+* This DAO will need a JPA Entity Manager❗
+
+## 🟦 JPA Entity Manager
+
+* The JPA Entity Manager needs a Data Source❗
+
+* The Data Source defines database connection info🤔
+
+* JPA Entity Manager and Data Source are automatically created By Spring Boot - base on application.properties
+
+* We can then inject/autowire the JPA Entity Manager into the Student DAO😱
+
+## 🟦 Plan
+
+### 🟥 StudentDAO and StudentDAOImpl
+
+* We shall define a `StudentDAO` interface which contains a `save()` method which saves a student passed into it✅
+
+* We shall then define an implementation - `StudentDAOImpl` which injects the `EntityManager` and uses it to persist the student object to the database✅
+
+### 🟥 Spring @Transactional Annotation
+
+* 🎃Spring provide the `@Transactional` annotation which will automatically begin and end a transaction for your JPA code🎃 
+
+* We shall use this annotation for our `save()` method in our StudentDAOImpl class✅
+
+### 🟥 Spring @Repository Annotation
+
+* Spring provides the `@Repository` annotation which is a "sub" annotation of `@Component`
+
+* This will register the class its applied as a bean automatically thanks to component scanning✅
+
+* 🎃`@Repository` provides translations for any JDBC related exception🎃
+
+* We shall apply this annotation to our `StudentDAOImpl` class✅
+
+### 🟥 Update the Main App
+
+* We shall inject the `StudentDAO` into the `CommandLineRunner` and write code which creates a Student object and then save it to the database while logging to the console!✅
+
+<hr>
+
+## 👨‍💻 Coding Demo 👨‍💻
+
+* I create a `dao` package:
+
+![](2023-05-01-12-07-19.png)
+
+* I define a `StudentDAO` interface:
+
+```java
+public interface StudentDAO {
+    void save(Student student);
+}
+```
+
+* I implement the interface with `StudentDAOImpl`:
+
+```java
+@Repository
+public class StudentDAOImpl implements StudentDAO {
+    private EntityManager entityManager;
+    public StudentDAOImpl(EntityManager entityManager){
+        this.entityManager = entityManager;
+    }
+    @Override
+    @Transactional
+    public void save(Student student) {
+        entityManager.persist(student);
+    }
+}
+```
+
+* ⚠️Without the `@Transactional` annotation, the application will fail when attempting to persist to the database⚠️
+
+* I then update the `CrudDemoApplication` class
+
+```java
+@SpringBootApplication
+public class CrudDemoApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(CrudDemoApplication.class, args);
+	}
+
+	@Bean
+	public CommandLineRunner commandLineRunner(StudentDAO studentDAO){
+		return runner -> {
+			saveStudent(studentDAO);
+		};
+	}
+
+	private void saveStudent(StudentDAO studentDAO) {
+		System.out.println("Defining a student: ");
+		Student student = new Student("Shiv", "Kumar","email.com");
+		System.out.println(student.toString());
+
+		System.out.println("Saving to database: ");
+		Student tempStudent = student;
+		studentDAO.save(tempStudent);
+		
+		System.out.println("Saved student. ID: "+tempStudent.getId());
+		}
+}
+```
+
+
+
 
 
 # 🧠 3.1 H1
@@ -334,6 +462,7 @@ public class Student {
 ❗
 ❌
 🤔
+⚠️
 😊 
 😱
 
