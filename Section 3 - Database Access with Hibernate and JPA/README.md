@@ -106,7 +106,7 @@ List<Student> listOfStudents = query.getResultList();
 
 * I can see the new user in the admin and privelleges page:
 
-        <img  width="300px" src="screenshots/2023-04-27-14-38-23.png">
+    <img  width="400px" src="screenshots/2023-04-27-14-38-23.png">
 
 * I create a new connection for the springstudent connection, and succesfully test the connection:
 
@@ -151,7 +151,7 @@ List<Student> listOfStudents = query.getResultList();
 
 * I go to spring initialzr and create the following project:
 
-![](2023-04-27-14-58-28.png)
+<img  width="500px" src="screenshots/2023-04-27-14-58-28.png">
 
 * I unzip the code folder [here](/demo-01-spring-hibernate-jpa-crud/)
 
@@ -197,7 +197,7 @@ spring.datasource.password=springstudent
 
 * We can see that the application is running:
 
-    ![](2023-04-27-15-07-36.png)
+    <img  width="700px" src="screenshots/2023-04-27-15-07-36.png">
 
 * ❗ We can switch off the spring boot banner from displaying in console with an additional property. We can also set the logging level to warn ❗
 
@@ -280,7 +280,7 @@ public class Student {
 
 * I create a new package called `entity` and create a `Student` class in it:
 
-![](2023-05-01-11-02-42.png)
+<img  width="500px" src="screenshots/2023-05-01-11-02-42.png">
 
 * I define the class as:
 
@@ -331,7 +331,7 @@ public class Student {
 
 * Data Access Object (DAO) is a 😱design pattern😱 in which an object is responsible for interfacing with the database:
 
-![](2023-05-01-11-12-30.png)
+<img  width="500px" src="screenshots/2023-05-01-11-12-30.png">
 
 * Our Student DAO will have the following methods:
 
@@ -391,7 +391,7 @@ public class Student {
 
 * I create a `dao` package:
 
-![](2023-05-01-12-07-19.png)
+<img  width="500px" src="screenshots/2023-05-01-12-07-19.png">
 
 * I define a `StudentDAO` interface:
 
@@ -445,12 +445,19 @@ public class CrudDemoApplication {
 		System.out.println("Saving to database: ");
 		Student tempStudent = student;
 		studentDAO.save(tempStudent);
-		
+
 		System.out.println("Saved student. ID: "+tempStudent.getId());
 		}
 }
 ```
 
+* Running the application, I see the following in my console:
+
+<img  width="500px" src="screenshots/2023-05-01-12-11-39.png">
+
+* Looking at MySQL, the student table returns:
+
+<img  width="500px" src="screenshots/2023-05-01-12-12-27.png">
 
 
 
