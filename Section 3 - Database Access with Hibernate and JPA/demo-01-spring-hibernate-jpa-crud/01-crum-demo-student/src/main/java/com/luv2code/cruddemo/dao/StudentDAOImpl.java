@@ -1,4 +1,4 @@
-package com.luv2code.cruddemo;
+package com.luv2code.cruddemo.dao;
 
 import com.luv2code.cruddemo.dao.StudentDAO;
 import com.luv2code.cruddemo.entity.Student;

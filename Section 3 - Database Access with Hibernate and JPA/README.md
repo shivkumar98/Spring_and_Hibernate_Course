@@ -460,6 +460,53 @@ public class CrudDemoApplication {
 <img  width="500px" src="screenshots/2023-05-01-12-12-27.png">
 
 
+<br>
+
+# 🧠 3.6 Primary Keys
+
+* Looking at the makeup of the `student` table in MySQL:
+
+![](2023-05-01-12-19-35.png)
+
+* We shall see the behaviour of the Autoincremented valye by writing some additional code in our application!
+
+* I comment out the coe which saves a single student in my `CrudDemoApplication` class and define a new method:
+
+```java
+	@Bean
+	public CommandLineRunner commandLineRunner(StudentDAO studentDAO){
+		return runner -> {
+			// saveStudent(studentDAO);
+
+			createMultipleStudents(studentDAO);
+		};
+	}
+```
+
+* I define the `createMultipleStudents()` method as'
+
+```java
+	private void createMultipleStudents(StudentDAO studentDAO) {
+		System.out.println("Creating 3 student objects: ");
+		Student tempStudent1 = new Student("Shiv", "Kumar","email.com");
+		Student tempStudent2 = new Student("John", "Doe","email.com");
+		Student tempStudent3 = new Student("Mark", "Jones","email.com");
+
+		System.out.println("Saving the students: ");
+		studentDAO.save(tempStudent1);
+		studentDAO.save(tempStudent2);
+		studentDAO.save(tempStudent3);
+
+	}
+```
+
+* Running the application:
+
+![](2023-05-01-12-25-21.png)
+
+* Looking at the database:
+
+![](2023-05-01-12-26-06.png)
 
 
 # 🧠 3.1 H1
