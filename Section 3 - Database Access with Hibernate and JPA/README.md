@@ -209,6 +209,124 @@ spring.main.banner-mode=off
 logging.level.root=warn
 ```
 
+<br>
+
+# 🧠 3.4 JPA Annotations
+
+* We shall map a Java class to a database table. The Java class will be a `Student` class with id, firstName, lastName, email fields
+
+## 🟦 Entity Class
+
+* The entity class must be annotated with `@Entity`❗ and must have public or protected no-argument constructor❗ (there can be other constructors)
+
+## 🟦 Annotations
+
+* `@Entity` - we declare this above the class we wish to map✅ If the database table has a different name to the class then we can use the `@Table` annotation to specify the DB table name😱
+
+* `@Column` is used to map a field of the class to the column✅ We can specify the name of the database column explicitly using `name` in brackets
+
+* ⚠️ The `@Column` annotation is completely optional if the table name is the same as the field name - however this is discouraged ⚠️
+
+## 🟦 Primary Key
+
+* 🎃A primary key is a unique, non-null value which can be used to reference a single column🎃
+
+## 🟦 MySQL Auto Increment
+
+* We can make use of `AUTO_INCREMENT` in MySQL such that the column will always have a generated unique value✅ This is especially useful for primary keys😊
+
+```sql
+CREATE TABLE student {
+	id INT NOT NULL AUTO_INCREMENT,
+	// ... ,
+	PRIMARY KEY(id)
+}
+```
+
+## 🟦 JPA Identity - Primary Key
+
+* JPA has a `@GeneratedValue` annotation allows us to enable the database to handle generation of this column. We specify the strategy in brackets:
+
+```java
+public class Student {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="id")
+	private int id;
+
+	//...
+}
+```
+
+
+
+### 🟥 Generation Strategy
+
+* We have the following strategies:
+
+| Name					| 	Description		|
+| --------------------- | ----------------- |
+| `GenerationType.AUTO`	|	Picks appropiate strategy for particular database |
+| `GenerationType.IDENTITY` | Assigns primary keys using DB identity column |
+| `GenerationType.SEQUENCE`  | Assigns primary keys using a database sequence |
+| `GenerationType.TABLE`     | As
+
+
+😱 You can define your own generation strategy by creating an implementation of `org.hibernate.id.IdentifierGenerator` and overriding the `generate()` method 😱
+
+
+<hr>
+
+## 👨‍💻 Coding Demo 👨‍💻
+
+* I create a new package called `entity` and create a `Student` class in it:
+
+![](2023-05-01-11-02-42.png)
+
+* I define the class as:
+
+```java
+@Entity
+@Table(name="student")
+public class Student {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
+    private int id;
+
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
+
+    @Column(name = "email")
+    private String email;
+
+    // defining constructors
+    public Student() {}
+    public Student(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+    
+    // define getters and setters:
+	// Getters and Setters here!
+    
+    // toString implementation
+    @Override
+    public String toString() {
+        return "Student{" + "id=" + id + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\''
+                + ", email='" + email + '\'' + '}';
+    }
+}
+```
+
+
+
 # 🧠 3.1 H1
 
 ## 🟦 H2
