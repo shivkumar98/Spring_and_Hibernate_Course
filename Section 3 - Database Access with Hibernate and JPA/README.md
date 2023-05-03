@@ -887,6 +887,84 @@ public class CrudDemoApplication {
 
 	<img  width="500px" src="screenshots/2023-05-03-14-32-49.png">
 
+<br>
+
+# 🧠 3.10 Updating Objects with JPA
+
+* We can delete a row from the DB by calling `entityManager.remove(object)`.
+
+* If we wanted to delete multiple row, then we need to create a query and call `executeUpdate()`:
+
+```java
+int numRowsDeleted = entityManager
+					.createQuery("DELETE FROM Student WHERE lastName='Kumar'")
+					.executeUpdate();
+```
+
+## 👨‍💻 Coding Demo 👨‍💻
+
+* I add a new method to `StudentDAO` interface:
+
+```java
+public interface StudentDAO {
+    void save(Student student);
+    Student findById(Integer id);
+    List<Student> findAll();
+    List<Student> findByLastName(String lastName);
+    void UpdateStudent(Student theStudent);
+    void delete(Integer studentId); // new method
+}
+```
+
+* I implement the method as:
+
+```java
+    @Override
+    @Transactional
+    public void delete(Integer studentId) {
+        Student student = entityManager.find(Student.class, studentId);
+        entityManager.remove(student);
+    }
+```
+
+* I update the `CrudDemoApplication`:
+
+```java
+@SpringBootApplication
+public class CrudDemoApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(CrudDemoApplication.class, args);
+	}
+
+	@Bean
+	public CommandLineRunner commandLineRunner(StudentDAO studentDAO){
+		return runner -> {
+			// saveStudent(studentDAO);
+			// createMultipleStudents(studentDAO);
+			// findStudent(studentDAO);
+			// queryStudents(studentDAO);
+			// queryStudentsByLastName(studentDAO);
+			// updateStudent(studentDAO);
+			deleteStudent(studentDAO);
+		};
+	}
+
+	private void deleteStudent(StudentDAO studentDAO) {
+		Integer studentId = 1;
+		System.out.println("Deleting student with ID: "+studentId);
+		studentDAO.delete(studentId);
+		boolean studentIsDeleted = studentDAO.findById(studentId) == null;
+		System.out.println("Student is deleted: "+studentIsDeleted);
+	}
+	// ....
+}
+```
+
+* Running the application:
+
+	<img  width="500px" src="screenshots/2023-05-03-14-55-46.png">
+
 # 🧠 3.1 H1
 
 ## 🟦 H2
@@ -899,7 +977,6 @@ public class CrudDemoApplication {
 😱
 
 * 🎃DEFINITION🎃
-
-IMAGE:    <img  width="500px" src="screenshots/2023-03-27-18-46-20.png">
+<img  width="500px" src="screenshots/2023-03-27-18-46-20.png">
 
 
