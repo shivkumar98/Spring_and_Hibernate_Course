@@ -453,11 +453,11 @@ public class CrudDemoApplication {
 
 * Running the application, I see the following in my console:
 
-<img  width="500px" src="screenshots/2023-05-01-12-11-39.png">
+	<img  width="500px" src="screenshots/2023-05-01-12-11-39.png">
 
 * Looking at MySQL, the student table returns:
 
-<img  width="500px" src="screenshots/2023-05-01-12-12-27.png">
+	<img  width="500px" src="screenshots/2023-05-01-12-12-27.png">
 
 
 <br>
@@ -466,7 +466,7 @@ public class CrudDemoApplication {
 
 * Looking at the makeup of the `student` table in MySQL:
 
-![](2023-05-01-12-19-35.png)
+	<img  width="500px" src="screenshots/2023-05-01-12-19-35.png">
 
 * We shall see the behaviour of the Autoincremented valye by writing some additional code in our application!
 
@@ -502,11 +502,38 @@ public class CrudDemoApplication {
 
 * Running the application:
 
-![](2023-05-01-12-25-21.png)
+	<img  width="500px" src="screenshots/2023-05-01-12-25-21.png">
 
 * Looking at the database:
 
-![](2023-05-01-12-26-06.png)
+	<img  width="500px" src="screenshots/2023-05-01-12-26-06.png">
+
+
+<br>
+
+# 🧠 3.7 Changing Index of MySQL Auto Increment
+
+* We can alter the database such that the starting value of the auto-increment index is different:
+
+	<img  width="500px" src="screenshots/2023-05-03-10-25-33.png">
+
+* Re-running the application
+
+	<img  width="500px" src="screenshots/2023-05-03-10-26-17.png">
+
+* Looking at the database:
+
+	<img  width="500px" src="screenshots/2023-05-03-10-26-55.png">
+
+* How could we reset the index such that it starts at 1?🤔 We can use the `TRUNCATE` command in MySQL which will delete everything from the table and restart the index:
+
+	<img  width="500px" src="screenshots/2023-05-03-10-34-14.png">
+
+* Re-running the application and quirying the table again:
+
+	<img  width="500px" src="screenshots/2023-05-03-10-35-19.png">
+
+
 
 
 # 🧠 3.1 H1
