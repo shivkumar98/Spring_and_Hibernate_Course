@@ -1,5 +1,7 @@
 package com.luv2code.cruddemo.dao;
 
+import java.util.List;
+
 import com.luv2code.cruddemo.dao.StudentDAO;
 import com.luv2code.cruddemo.entity.Student;
 import jakarta.persistence.EntityManager;
@@ -23,5 +25,10 @@ public class StudentDAOImpl implements StudentDAO {
     @Override
     public Student findById(Integer studentId){
         return entityManager.find(Student.class, studentId);
+    }
+
+    @Override
+    public List<Student> findAll() {
+        return entityManager.createQuery("FROM Student").getResultList();
     }
 }

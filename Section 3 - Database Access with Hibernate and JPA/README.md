@@ -623,6 +623,112 @@ public class CrudDemoApplication {
 	<img  width="500px" src="screenshots/2023-05-03-11-04-03.png">
 
 
+<br>
+
+# 🧠 3.9 Querying Objects with JPA
+
+* We have seen how to retrieve a single object with JPA, we shall now look how to retrieve multiple objects using ❗**JPA Query Language**❗
+
+* 🎃The JPA Query Language is a syntax for retrieving objects based on entity name and entity fields. It's similary conceptionally to SQL with where, like, join, ... etc🎃
+
+## 🟦 Example 1
+
+* Here's how we would write a JPQL statement for retrieving all Students in our `student` table:
+
+```java
+TypedQuery<Student> theQuery = entityManager.createQuery("FROM student", Student.class);
+List<Student> students = theQuery.getResultList();
+```
+
+* ⚠️The student within the query does NOT correspond to the database table of the same name⚠️
+
+## 🟦 Example 2
+
+*  Here's how we can filter results from a query:
+
+```java
+TypedQuery<Student> query = entityManager.createQuery(
+	"FROM Student WHERE lastName='Kumar'", Student.class)
+List<Student> students = query.getResultList();
+```
+
+## 🟦 JPQL - Named Parameters
+
+* 🎃Named parameters allows us to programatically use values within the JPQL query!🎃
+
+* We prefix the named parameters with a colon in our query!
+
+* E.g. let's use a method parameters as a named parameter:
+
+```java
+public List<Student> findByLastName(String theLastName){
+	TypedQuery<Student> query = entityManager.createQuery(
+		"FROM Student WHERE lastName=:theData", Student.class);
+	query.setParameter("theData", theLastName);
+	return query.getResultList();
+}
+```
+
+## 👨‍💻 Coding Demo 👨‍💻
+
+* I update the `StudentDAO` interface:
+
+```java
+public interface StudentDAO {
+    void save(Student student);
+    Student findById(Integer id);
+    List<Student> findAll(); // new method
+}
+```
+
+* I implement the method in `StudentDAOImpl`:
+
+```java
+@Repository
+public class StudentDAOImpl implements StudentDAO {
+
+    // ...
+
+    @Override
+    public List<Student> findAll() {
+        return entityManager.createQuery("FROM Student").getResultList();
+    }
+}
+```
+
+
+* I then update the `CrudDemoApplication`:
+
+```java
+@SpringBootApplication
+public class CrudDemoApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(CrudDemoApplication.class, args);
+	}
+
+	@Bean
+	public CommandLineRunner commandLineRunner(StudentDAO studentDAO){
+		return runner -> {
+			// saveStudent(studentDAO);
+			// createMultipleStudents(studentDAO);
+			// findStudent(studentDAO);
+			queryStudents(studentDAO);
+		};
+	}
+
+	private void queryStudents(StudentDAO studentDAO) {
+		System.out.println("Querying all students");
+		List<Student> list = studentDAO.findAll();
+		list.forEach(s -> System.out.println(s));
+	}
+	// ...
+}
+```
+
+* Running the application:
+
+	<img  width="500px" src="screenshots/2023-05-03-11-50-49.png">
 
 # 🧠 3.1 H1
 
