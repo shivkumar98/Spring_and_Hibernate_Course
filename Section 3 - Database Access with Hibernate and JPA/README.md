@@ -889,7 +889,7 @@ public class CrudDemoApplication {
 
 <br>
 
-# 🧠 3.10 Updating Objects with JPA
+# 🧠 3.11 Deleting Objects with JPA
 
 * We can delete a row from the DB by calling `entityManager.remove(object)`.
 
@@ -901,7 +901,7 @@ int numRowsDeleted = entityManager
 					.executeUpdate();
 ```
 
-## 👨‍💻 Coding Demo 👨‍💻
+## 👨‍💻 Coding Demo 1 👨‍💻
 
 * I add a new method to `StudentDAO` interface:
 
@@ -964,6 +964,63 @@ public class CrudDemoApplication {
 * Running the application:
 
 	<img  width="500px" src="screenshots/2023-05-03-14-55-46.png">
+
+## 👨‍💻 Coding Demo 2 👨‍💻
+
+* I add a `deleteAll()` method to the `StudentDAO` interface:
+
+```java
+public interface StudentDAO {
+	// ...
+    void deleteAll();
+}
+```
+
+* I implement the method as:
+
+```java
+    @Override
+    @Transactional
+    public void deleteAll() {
+        entityManager
+                .createQuery("DELETE FROM Student")
+                .executeUpdate();
+    }
+```
+
+* I update `CrudDemoApplication` to:
+
+```java
+@SpringBootApplication
+public class CrudDemoApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(CrudDemoApplication.class, args);
+	}
+
+	@Bean
+	public CommandLineRunner commandLineRunner(StudentDAO studentDAO){
+		return runner -> {
+			deleteAllStudents(studentDAO);
+		};
+	}
+
+	private void deleteAllStudents(StudentDAO studentDAO) {
+		System.out.println("Deleting all students");
+		studentDAO.deleteAll();
+		boolean thereAreNoStudents = studentDAO.findAll().size() == 0;
+		System.out.println("Deleted all? "+ thereAreNoStudents);
+	}
+	// ...
+}
+```
+
+* Running the application:
+
+<img  width="500px" src="screenshots/2023-05-03-15-12-34.png">
+
+
+
 
 # 🧠 3.1 H1
 
