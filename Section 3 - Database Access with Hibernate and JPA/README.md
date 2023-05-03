@@ -669,7 +669,7 @@ public List<Student> findByLastName(String theLastName){
 }
 ```
 
-## 👨‍💻 Coding Demo 👨‍💻
+## 👨‍💻 Coding Demo 1 👨‍💻
 
 * I update the `StudentDAO` interface:
 
@@ -729,6 +729,69 @@ public class CrudDemoApplication {
 * Running the application:
 
 	<img  width="500px" src="screenshots/2023-05-03-11-50-49.png">
+
+## 👨‍💻 Coding Demo 2 👨‍💻
+
+* I create a new method in the `StudentDAO` interface which will use a named parameter:
+
+```java
+public interface StudentDAO {
+    void save(Student student);
+    Student findById(Integer id);
+    List<Student> findAll();
+    List<Student> findByLastName(String lastName); // new method
+}
+```
+
+* I implement this method as:
+
+```java
+@Repository
+public class StudentDAOImpl implements StudentDAO {
+	// ....
+    @Override
+    public List<Student> findByLastName(String lastName) {
+        TypedQuery<Student> query = entityManager.createQuery(
+                "FROM Student WHERE lastName=:lastName", Student.class);
+        query.setParameter("lastName", lastName);
+        return query.getResultList();
+    }
+}
+```
+
+* I update the code in the `CrudDemoApplication`:
+
+```java
+@SpringBootApplication
+public class CrudDemoApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(CrudDemoApplication.class, args);
+	}
+
+	@Bean
+	public CommandLineRunner commandLineRunner(StudentDAO studentDAO){
+		return runner -> {
+			// saveStudent(studentDAO);
+			// createMultipleStudents(studentDAO);
+			// findStudent(studentDAO);
+			// queryStudents(studentDAO);
+			queryStudentsByLastName(studentDAO);
+		};
+	}
+
+	private void queryStudentsByLastName(StudentDAO studentDAO){
+		System.out.println("Querying students by last name:");
+		List<Student> students = studentDAO.findByLastName("Kumar");
+		students.forEach(System.out::println);
+	}
+}
+```
+
+* Running the application:
+
+
+
 
 # 🧠 3.1 H1
 
