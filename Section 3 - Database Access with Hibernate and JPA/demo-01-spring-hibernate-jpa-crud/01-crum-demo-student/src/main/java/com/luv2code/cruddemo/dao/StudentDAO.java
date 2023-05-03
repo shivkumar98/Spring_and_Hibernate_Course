@@ -7,4 +7,6 @@ import jakarta.persistence.EntityManager;
 public interface StudentDAO {
 
     void save(Student student);
+
+    Student findById(Integer id);
 }

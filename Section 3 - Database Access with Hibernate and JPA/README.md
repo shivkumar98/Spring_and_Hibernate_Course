@@ -534,6 +534,94 @@ public class CrudDemoApplication {
 	<img  width="500px" src="screenshots/2023-05-03-10-35-19.png">
 
 
+<br>
+
+# 🧠 3.8 Reading Objects with JPA
+
+## 🟦 Plan
+
+* We've seen how to create objects, we shall now see how to retrieve an object
+
+* JPA has a method to find an object using entityManager and calling the `find()` method which accepts the entity class and primaryy key:
+
+```java
+Student student = entityManager.find(Student.class, 1); // returns null if not found
+```
+
+* We shall add a new method to the `StudentDAO` interface `Student findById(Integer id)` and implement this method in `StudentDAOImpl`
+
+* We shall then update the main app which will create a student, save it, find its primary key and then retrieve it
+
+## 👨‍💻 Coding Demo 👨‍💻
+
+*  I updated the `StudentDAO` interface:
+
+```java
+public interface StudentDAO {
+
+    void save(Student student);
+
+    Student findById(Integer id); // new method
+}
+```
+
+* I update the `StudentDAOImpl` implementation:
+
+```java
+@Repository
+public class StudentDAOImpl implements StudentDAO {
+
+   // ...
+
+    @Override
+    public Student findById(Integer studentId){
+        return entityManager.find(Student.class, studentId);
+    }
+}
+```
+
+* I then changed the code in the `CrudDemoApplication` class:
+
+```java
+
+@SpringBootApplication
+public class CrudDemoApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(CrudDemoApplication.class, args);
+	}
+
+	@Bean
+	public CommandLineRunner commandLineRunner(StudentDAO studentDAO){
+		return runner -> {
+			// saveStudent(studentDAO);
+			// createMultipleStudents(studentDAO);
+			findStudent(studentDAO);
+		};
+	}
+
+	private void findStudent(StudentDAO studentDAO) {
+		System.out.println("Creating Student: ");
+		Student student = new Student("Shiv", "Kumar","email.com");
+
+		Student tempStudent = student;
+		studentDAO.save(tempStudent);
+		System.out.println("Saving student with Generated ID: "+ tempStudent.getId());
+
+
+		System.out.println("Finding student with ID: "+tempStudent.getId());
+		Student foundStudent = studentDAO.findById(tempStudent.getId());
+		System.out.println(foundStudent.toString());
+	}
+
+	// ...
+}
+```
+
+* Running the application displays:
+
+	<img  width="500px" src="screenshots/2023-05-03-11-04-03.png">
+
 
 
 # 🧠 3.1 H1
