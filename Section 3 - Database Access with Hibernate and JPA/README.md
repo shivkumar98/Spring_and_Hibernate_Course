@@ -790,8 +790,102 @@ public class CrudDemoApplication {
 
 * Running the application:
 
+	<img  width="500px" src="screenshots/2023-05-03-13-16-49.png">
 
 
+<br>
+
+# 🧠 3.10 Updating Objects with JPA
+
+* We can update a row inside of a table in DB by calling `entityManager.merge(object)` - this will update an object based on the primary key
+
+* If we want to update multiple rows in the DB, we must create a query and call the `executeQuery()` method on it. This will return the number of rows updated:
+
+```java
+// updating an existing row:
+Student student = entityManager.find(Student.class, 1);
+student.setLastName("Kumar");
+entityManager.merge(student);
+
+// updating multiple rows:
+int numberOfRowsUpdate = entityManager.createQuery(
+	"UPDATE Student SET lastName='test'")
+	.executeUpdate();
+```
+
+## 👨‍💻 Coding Demo 👨‍💻
+
+* I add `UpdateStudent()` to the StudentDAO
+
+```java
+public interface StudentDAO {
+    void save(Student student);
+    Student findById(Integer id);
+    List<Student> findAll();
+    List<Student> findByLastName(String lastName);
+    void UpdateStudent(Student theStudent); // new method
+}
+```
+
+* I then implement the method in `StudentDAOImpl`:
+
+```java
+@Repository
+public class StudentDAOImpl implements StudentDAO {
+	// ...
+    @Transactional
+    public void UpdateStudent(Student theStudent) {
+        entityManager.merge(theStudent);
+    }
+}
+```
+
+* I then update `CrudDemoApplication`:
+
+```java
+@SpringBootApplication
+public class CrudDemoApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(CrudDemoApplication.class, args);
+	}
+
+	@Bean
+	public CommandLineRunner commandLineRunner(StudentDAO studentDAO){
+		return runner -> {
+			// saveStudent(studentDAO);
+			// createMultipleStudents(studentDAO);
+			// findStudent(studentDAO);
+			// queryStudents(studentDAO);
+			// queryStudentsByLastName(studentDAO);
+			updateStudent(studentDAO);
+		};
+	}
+
+	private void updateStudent(StudentDAO studentDAO) {
+		int studentId = 1;
+		System.out.println("Finding student with id: "+studentId);
+
+		Student student = studentDAO.findById(studentId);
+		System.out.println("Found student: "+student.toString());
+
+		System.out.println("Updating name to scooby: ");
+		student.setLastName("Scooby");
+		System.out.println(student.toString());
+
+		System.out.println("Updating row in DB");
+		studentDAO.UpdateStudent(student);
+
+		System.out.println("Retrieving student:");
+		System.out.println(studentDAO.findById(studentId).toString());
+	}
+	// ...
+}
+```
+
+* Running the application:
+
+	<img  width="500px" src="screenshots/2023-05-03-14-32-49.png">
 
 # 🧠 3.1 H1
 
