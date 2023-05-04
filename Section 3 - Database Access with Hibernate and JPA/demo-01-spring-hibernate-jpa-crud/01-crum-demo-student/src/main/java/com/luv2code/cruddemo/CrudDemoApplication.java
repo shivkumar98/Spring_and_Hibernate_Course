@@ -19,14 +19,14 @@ public class CrudDemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO){
 		return runner -> {
-			// saveStudent(studentDAO);
-			// createMultipleStudents(studentDAO);
+			//saveStudent(studentDAO);
+			 createMultipleStudents(studentDAO);
 			// findStudent(studentDAO);
 			// queryStudents(studentDAO);
 			// queryStudentsByLastName(studentDAO);
 			// updateStudent(studentDAO);
 			// deleteStudent(studentDAO);
-			deleteAllStudents(studentDAO);
+			//deleteAllStudents(studentDAO);
 		};
 	}
 
