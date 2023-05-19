@@ -238,6 +238,92 @@ public class DemoRestController {
 
 * Spring automatically handles Jackson Integration!
 
+<br>
+
+
+
+# 🧠 4.7 Spring Boot REST POJO
+
+* We shall create a REST endpoint `/api/students/` which returns a list of students
+
+* We will need to convert the Java List into a JSON. Spring Boot automatically converts the Java POJO as JSON using Jackson
+
+## 👨‍💻 Coding Demo 👨‍💻
+
+* I defined a `Student` class as:
+
+```java
+@Component
+public class Student {
+
+    private String firstName;
+    private String lastName;
+
+    public Student(){}
+
+    public Student(String firstName, String lastName){
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" + "firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + '}';
+    }
+}
+```
+
+* I created a new end-point in my `DemoRestController`:
+
+```java
+@RestController
+@RequestMapping("/test")
+public class DemoRestController {
+
+    @GetMapping("/hello")
+    public String sayHello(){
+        return "Hello World!";
+    }
+
+    @GetMapping("students")
+    public List<Student> getStudents(){
+        return Arrays.asList(new Student("Shiv", "Kumar"), new Student("Sammy", "Ling"));
+    }
+}
+```
+
+* Opening up my browser, I get the following:
+
+![](screenshots/2023-05-19-12-06-35.png)
+
+* I realise that it's not working because I have no setters/getters😱 
+
+* After adding the setters/getters, the app starts working:
+
+```java
+@Component
+public class Student {
+    private String firstName;
+    private String lastName;
+    public Student(){}
+    public Student(String firstName, String lastName) {
+        this.firstName = firstName; this.lastName = lastName; }
+    public String getFirstName() {
+        return firstName; }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName; }
+    public String getLastName() {
+        return lastName; }
+    public void setLastName(String lastName) {
+        this.lastName = lastName; }
+    @Override
+    public String toString() {
+        return "Student{" + "firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + '}'; }
+}
+```
+
+![](screenshots/2023-05-19-12-09-50.png)
+
 
 * 🎃DEFINITION🎃
 
