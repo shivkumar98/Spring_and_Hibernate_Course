@@ -325,6 +325,61 @@ public class Student {
 ![](screenshots/2023-05-19-12-09-50.png)
 
 
+
+<br>
+
+
+
+# 🧠 4.8 Spring Boot REST Path Variables
+
+* We can use refactor our code, so that we are not recreating a list of students over and over again. We create a private field in our `DemoRestController` and created a method which initialises this field:
+
+```java
+@RestController
+@RequestMapping("/test")
+public class DemoRestController {
+
+    private List<Student> theStudents;
+
+    @PostConstruct
+    public void loadDate() {
+        theStudents = Arrays.asList(
+                new Student("Shiv", "Kumar"),
+                new Student("Sammy", "Ling"),
+                new Student("Rohan", "Verma"));
+    }
+    @GetMapping("/hello")
+    public String sayHello(){
+        return "Hello World!";
+    }
+    @GetMapping("students")
+    public List<Student> getStudents(){
+        return theStudents;
+    }
+}
+```
+
+* I used the `@PostConstruct` annotation so that the method is only executed once after the class has been constructed!
+
+* We can use path variables which let us extract variables from the URL! Suppose we wanted to return a specific student.
+
+* I create a Get mapping in the `DemoRestController`:
+
+```java
+    @GetMapping("/students/{studentId}")
+    public Student getStudent(@PathVariable int studentId){
+        return theStudents.get(studentId);
+    }
+```
+
+* The path variable works:
+
+![](2023-05-19-12-22-52.png)
+
+* Suppose we make a call which exceeds the index of the List:
+
+![](2023-05-19-12-23-57.png)
+
 * 🎃DEFINITION🎃
 
 ## 🟦 H2
