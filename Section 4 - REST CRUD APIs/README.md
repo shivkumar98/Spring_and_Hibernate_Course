@@ -1,10 +1,10 @@
 <link rel="stylesheet" href="../style.css" />
 
-# 🟪 Section 3 - Spring Boot 3 - REST CRUD APIs
+# 🟪 Section 4 - Spring Boot 3 - REST CRUD APIs
 
 
 
-# 🧠 3.1 Introduction
+# 🧠 4.1 Introduction
 
 In this section, we will be doing the following:
 
@@ -22,7 +22,7 @@ This will act as an introduction to Spring REST developmebt
 
 <br>
 
-# 🧠 3.2 REST Services
+# 🧠 4.2 REST Services
 
 ## 🟦 Coding scenario
 
@@ -74,7 +74,7 @@ api.openweathermap.org/data/2.5/weather?q={cityName},{countryCode}
 
 <br>
 
-# 🧠 3.3 Spring Boot REST HTTP Basics
+# 🧠 4.3 Spring Boot REST HTTP Basics
 
 ## 🟦 HTTP Methods
 
@@ -134,7 +134,7 @@ api.openweathermap.org/data/2.5/weather?q={cityName},{countryCode}
 
 <br>
 
-# 🧠 3.4 Postman Demo
+# 🧠 4.4 Postman Demo
 
 * I open a new tab in Postman and see this:
 
@@ -152,7 +152,7 @@ api.openweathermap.org/data/2.5/weather?q={cityName},{countryCode}
 
 
 
-# 🧠 3.5 Spring REST Controller
+# 🧠 4.5 Spring REST Controller
 
 ## 🟦 Coding Scenario
 
@@ -214,8 +214,29 @@ public class DemoRestController {
 
 * The app works as expected!
 
----
 
+
+<br>
+
+
+
+# 🧠 4.6 Java JSON Data Binding
+
+## 🟦 What is Data binding?
+
+* 🎃Data binding is the process of converting JSON data to Java POJO (and reverse)🎃
+
+* This is also know as serialisation/deserialisation or Mapping
+
+* Spring used the Jackson Project which handles the databinding by calling the appropiate getter/setter method:
+
+![](screenshots/2023-05-19-11-04-29.png)
+
+* When mapping from the JSON, Jackson calls the setX() method on the class - it does not access properties directly!
+
+* When mapping from the JSON, Jackson calls the getX() method on the class
+
+* Spring automatically handles Jackson Integration!
 
 
 * 🎃DEFINITION🎃
