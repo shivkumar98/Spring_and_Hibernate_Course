@@ -374,11 +374,57 @@ public class DemoRestController {
 
 * The path variable works:
 
-![](2023-05-19-12-22-52.png)
+![](screenshots/2023-05-19-12-22-52.png)
 
 * Suppose we make a call which exceeds the index of the List:
 
-![](2023-05-19-12-23-57.png)
+![](screenshots/2023-05-19-12-23-57.png)
+
+## 👨‍💻 Coding Demo 👨‍💻
+
+* Our Rest controller instantiates a list of Students each time the /students endpoint is called:
+
+```java
+@RestController
+@RequestMapping("/api")
+public class StudentRestController {
+    // define end point for students
+    @GetMapping("/students")
+    public List<Student> getStudents() {
+        return Arrays.asList(
+                new Student("Shiv", "Kumar"),
+                new Student("Rohan", "Verma")
+        );
+    }
+}
+```
+
+* I will utitlise the `@PostConstruct` annotation and use it to initialise the list exactly once! I create a private field for the students which will get initialised:
+
+```java
+@RestController
+@RequestMapping("/api")
+public class StudentRestController {
+
+    private List<Student> studentsList;
+
+    // the studentList will get initialised exactly once!
+    @PostConstruct
+    public void loadStudentsData() {
+        studentsList = Arrays.asList(
+                new Student("Shiv", "Kumar"),
+                new Student("Rohan", "Verma")
+        );
+    }
+
+    // define end point for students
+    @GetMapping("/students")
+    public List<Student> getStudents() {
+        return studentsList;
+    }
+}
+```
+
 
 * 🎃DEFINITION🎃
 
