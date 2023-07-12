@@ -425,6 +425,24 @@ public class StudentRestController {
 }
 ```
 
+* I define a new endpoint which will return the student using index:
+
+```java
+// define endpoint for "/students/{studentId}" using index
+@GetMapping("/students/{studentId}")
+public Student getStudentById(@PathVariable int studentId){
+    return studentsList.get(studentId);
+}
+```
+
+* And it works!
+
+![](2023-07-12-11-35-42.png)
+
+* If we try a URL which exceeds the bounds of the array, then we get the following error in postman:
+
+![](2023-07-12-11-38-56.png)
+
 
 * 🎃DEFINITION🎃
 
