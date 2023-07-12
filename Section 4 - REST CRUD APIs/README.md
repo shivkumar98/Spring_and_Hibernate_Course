@@ -444,6 +444,13 @@ public Student getStudentById(@PathVariable int studentId){
 ![](2023-07-12-11-38-56.png)
 
 
+<br>
+
+
+# 🧠 4.9 Spring Boot Exception Handling
+
+
+
 * 🎃DEFINITION🎃
 
 ## 🟦 H2
