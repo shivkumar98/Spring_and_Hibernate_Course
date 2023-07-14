@@ -437,17 +437,127 @@ public Student getStudentById(@PathVariable int studentId){
 
 * And it works!
 
-![](2023-07-12-11-35-42.png)
+![](screenshots/2023-07-12-11-35-42.png)
 
 * If we try a URL which exceeds the bounds of the array, then we get the following error in postman:
 
-![](2023-07-12-11-38-56.png)
+![](screenshots/2023-07-12-11-38-56.png)
 
 
 <br>
 
 
 # 🧠 4.9 Spring Boot Exception Handling
+
+* We will create a custom error response class, custom Runtime Exception, update the REST service to handle if student is not found.
+
+* The response class will be sent to client as JSON
+
+* We will define a `StudentNotFoundException` which extends Runtime Exception
+
+
+## Coding Demo
+
+* I create `StudentErrorResponse` class here
+
+![](screenshots/2023-07-12-11-51-24.png)
+
+* I define its fields, constructors:
+
+```java
+public class StudentErrorResponse {
+    private int status;
+    private String message;
+    private long timeStamp;
+    public StudentErrorResponse() { }
+    public StudentErrorResponse(int status, String message, long timeStamp) {
+        this.status = status;
+        this.message = message;
+        this.timeStamp = timeStamp;
+    }
+    // getters and setters
+}
+```
+
+* I create the `StudentNotFoundException` class in this package:
+
+![](screenshots/2023-07-12-11-56-27.png)
+
+* ..and define it as:
+
+```java
+public class StudentNotFoundException extends RuntimeException {
+    public StudentNotFoundException(String message){
+        super(message);
+    }
+}
+```
+
+* I update the `StudentRestController`'s `getStudentById()` method to:
+
+```java
+@GetMapping("/students/{studentId}")
+public List<Student> getStudentById(@PathVariable int studentId) {
+    if (studentId>=studentsList.size() || studentId<0) {
+        throw new StudentNotFoundException("This studentId: "+studentId+ " does not exist");
+    }
+    return studentsList.get(studentId);
+}
+```
+
+* Within the StudentRestController, I define another method for handling the message:
+
+```java
+@ExceptionHandler
+public String handleException(StudentNotFoundException exc) {
+    return exc.getMessage();
+}
+```
+
+* Now when I run the application:
+
+![](screenshots/2023-07-14-15-17-58.png)
+
+* I update the exception handler:
+
+```java
+public ResponseEntity<StudentErrorResponse> handleException(StudentNotFoundException exc) {
+    StudentErrorResponse response = new StudentErrorResponse();
+    response.setMessage(exc.getMessage());
+    response.setStatus(HttpStatus.NOT_FOUND.value());
+    response.setTimeStamp(System.currentTimeMillis());
+    return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+}
+```
+
+* Now we see a nice response:
+
+![](screenshtots/2023-07-14-15-28-13.png)
+
+* If we type a parameter which cannot be binded to an `int`, then we get the following:
+
+![](2023-07-14-15-30-43.png)
+
+* Looking at the logs in the console:
+
+![](2023-07-14-15-32-08.png)
+
+* We shall now look at how to create a "catch-all" exception handler to deal with these edge cases:
+
+```java
+// handling more general exceptions:
+@ExceptionHandler
+public ResponseEntity<StudentErrorResponse> handleException(Exception exc) {
+    // we are still using the StudentErrorResponse:
+    StudentErrorResponse response = new StudentErrorResponse();
+    response.setStatus(HttpStatus.BAD_REQUEST.value());
+    response.setMessage(exc.getMessage());
+    response.setTimeStamp(System.currentTimeMillis());
+    return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+}
+```
+
+* Now when we use a random String as the parameter, we get a nice error response:
 
 
 
