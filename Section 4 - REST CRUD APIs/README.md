@@ -455,8 +455,9 @@ public Student getStudentById(@PathVariable int studentId){
 
 * We will define a `StudentNotFoundException` which extends Runtime Exception
 
+<br>
 
-## Coding Demo
+## 👨‍💻 Coding Demo 👨‍💻
 
 * I create `StudentErrorResponse` class here
 
@@ -536,11 +537,11 @@ public ResponseEntity<StudentErrorResponse> handleException(StudentNotFoundExcep
 
 * If we type a parameter which cannot be binded to an `int`, then we get the following:
 
-![](2023-07-14-15-30-43.png)
+![](screenshots/023-07-14-15-30-43.png)
 
 * Looking at the logs in the console:
 
-![](2023-07-14-15-32-08.png)
+![](screenshots/2023-07-14-15-32-08.png)
 
 * We shall now look at how to create a "catch-all" exception handler to deal with these edge cases:
 
@@ -559,14 +560,53 @@ public ResponseEntity<StudentErrorResponse> handleException(Exception exc) {
 
 * Now when we use a random String as the parameter, we get a nice error response:
 
+![](screenshots/2023-07-14-15-39-32.png)
 
 
-* 🎃DEFINITION🎃
+<hr>
 
-## 🟦 H2
+# 🧠 4.10 Global Exception Handling
 
-IMAGE:    <img  width="600px" src="screenshots/2023-03-27-18-46-20.png">
+* We've only applied exception handler to a specific REST controller.
 
-CHECKBOX ✅
+* We need to create a central exception handler which can be used across multiple controllers.
 
-CROSS  ❌
+* We use `@ControllerAdvice` from Spring to pre-process reuests to controller. This will then the `@ControllerAdvice` will be used to return the response.
+
+<br>
+
+## 👨‍💻 Coding Demo 👨‍💻
+
+* I create a `StudentRestExceptionHandler` class in the `rest` package:
+
+![](screenshots/2023-07-14-15-51-13.png)
+
+* I cut the exception handling methods from `StudentRestController` into my `StudentRestExceptionHandler`:
+
+```java
+@ControllerAdvice
+public class StudentRestExceptionHandler {
+
+    @ExceptionHandler
+    public ResponseEntity<StudentErrorResponse> handleException(StudentNotFoundException exc) {
+        StudentErrorResponse response = new StudentErrorResponse();
+        response.setStatus(HttpStatus.NOT_FOUND.value());
+        response.setMessage(exc.getMessage());
+        response.setTimeStamp(System.currentTimeMillis());
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+    // handling more general exceptions:
+    @ExceptionHandler
+    public ResponseEntity<StudentErrorResponse> handleException(Exception exc) {
+        // we are still using the StudentErrorResponse:
+        StudentErrorResponse response = new StudentErrorResponse();
+        response.setStatus(HttpStatus.BAD_REQUEST.value());
+        response.setMessage(exc.getMessage());
+        response.setTimeStamp(System.currentTimeMillis());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+}
+```
+
+* I rerun my application, and it all works!!!
