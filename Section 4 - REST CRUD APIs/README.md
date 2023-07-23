@@ -610,3 +610,9 @@ public class StudentRestExceptionHandler {
 ```
 
 * I rerun my application, and it all works!!!
+
+
+# 🧠 4.11 Spring Boot REST Project Setup
+
+*  I create a new REST API project.
+* View the repo for this project [here](https://github.com/shivkumar98/Spring-Boot-REST-Project)
