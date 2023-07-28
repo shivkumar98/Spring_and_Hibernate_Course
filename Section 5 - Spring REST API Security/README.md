@@ -35,7 +35,7 @@ In this section I will learn how to:
 
 * In programatic security, we define custom coding to manage security (which spring offers in its Security API)
 
-### Enabling Spring Security
+### 🔴 Enabling Spring Security
 
 * We need the following dependency in our `pom.xml` to include Spring security:
 
@@ -83,4 +83,56 @@ spring.security.user.password = password
 ```properties
 spring.security.user.name = shiv
 spring.security.user.password = passwordS
+```
+
+
+# 🧠 5.2 Configuring Basic Security
+
+## 🟦 Overview
+
+* We can create a configuration for our security by creating a class with `@Configuration`:
+
+```java
+@Configuration
+public class DemoSecurityConfig {
+    // config here
+}
+```
+
+* We can specify how our password is stored, we have `noop` which store plain text📝 and `bcrypt` which is a sophisticated encryption which uses salting and hashing.
+
+* If we are specifying passwords, we must specify the encryptionId like `{id}myPassword` - e.g.: `{bcrypt}myPassword`
+
+## 👨‍💻 Coding Demo 👨‍💻
+
+* I create a new class in a new `security` package:
+
+![](screenshots/2023-07-28-12-00-06.png)
+
+* I define it as:
+
+```java
+@Configuration
+public class DemoSecurityConfig {
+    @Bean
+    public InMemoryUserDetailsManager() {
+        UserDetails shiv = User.builder()
+                .username("shiv")
+                .password("{noop}passwordSh")
+                .roles("EMPLOYEE")
+                .build();
+        UserDetails mary = User.builder()
+                .username("mary")
+                .password("{noop}passwordMa")
+                .roles("EMPLOYEE", "MANAGER")
+                .build();
+        UserDetails susan = User.builder()
+                .username("susan")
+                .password("{noop}passwordSu")
+                .roles("EMPLOYEE", "MANAGER", "ADMIN")
+                .build();
+        return new InMemoryUserDetailsManager(shiv, susan, mary);
+    }
+
+}
 ```
