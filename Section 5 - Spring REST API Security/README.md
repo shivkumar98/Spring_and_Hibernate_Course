@@ -144,3 +144,91 @@ public class DemoSecurityConfig {
 * I successfully get a JSON response with the employees table!
 
 * I obtain the same result when using susan or mary's login!
+
+
+# 🧠 5.3 Restrict Access Based on Roles
+
+## 🟦 Overview
+
+* Let's refine our criteria for out REST API such that certain URL/HTTP requests are restricted depending on role:
+
+| Http Method  | Endpoint   | Role |
+| -------------| -----------| ------|
+| GET          | `/api/employees` | `EMPLOYEE` |
+| GET          | `/api/employees/{employeeId}` | `EMPLOYEE` |
+| POST | `/api/employees` | `MANAGER` |
+| PUT | `/api/employees` | `MANAGER` |
+| DELETE | `/api/employees/{employeeId}` | `ADMIN` |
+
+* We can achieve this using the `requestMatcher()` method:
+
+```java
+requestMatchers(HttpMethod method, String url).
+.hasRole(String role)
+
+requestMatchers(HttpMethod method, String url).
+.hasAnyRoleRole(String... roles)
+```
+
+## 🟦 Cross Site Request Forgery (CSFR)
+
+* Spring Security can protect against CSRF attacks which attempt to embed additional authentication data/token to all HTML forms
+* Generally CSRF protection is not needed for REST APIs which use Http request and/or PATCH. We can disable this protection with the following:
+
+```java
+http.csrf(csrf -> csrf.disable());
+```
+
+## 👨‍💻 Coding Demo 👨‍💻
+
+* Currently my `DemoSecurityConfig` class looks like:
+
+```java
+@Configuration
+public class DemoSecurityConfig {
+    @Bean
+    public InMemoryUserDetailsManager userDetailsManager() {
+        UserDetails shiv = User.builder()
+                .username("shiv")
+                .password("{noop}passwordSh")
+                .roles("EMPLOYEE")
+                .build();
+        UserDetails mary = User.builder()
+                .username("mary")
+                .password("{noop}passwordMa")
+                .roles("EMPLOYEE", "MANAGER")
+                .build();
+        UserDetails susan = User.builder()
+                .username("susan")
+                .password("{noop}passwordSu")
+                .roles("EMPLOYEE", "MANAGER", "ADMIN")
+                .build();
+        return new InMemoryUserDetailsManager(shiv, susan, mary);
+    }
+}
+```
+
+* I create a new Bean:
+
+```java
+@Bean
+public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+    http.authorizeHttpRequests(configurer ->
+        configurer
+          .requestMatchers(HttpMethod.GET, "/api/employees").hasRole("EMPLOYEE")
+          .requestMatchers(HttpMethod.GET, "/api/**").hasRole("EMPLOYEE")
+          .requestMatchers(HttpMethod.POST, "/api/employees").hasRole("MANAGER")
+          .requestMatchers(HttpMethod.PUT, "/api/employees").hasRole("MANAGER")
+          .requestMatchers(HttpMethod.DELETE, "api/employees/**").hadRole("ADMIN")
+    );
+    // use basic authentication:
+    http.httpBasic(Customiser.withDefaults());
+    // disable 
+    http.csrf(customiser -> customiser.disable());
+    return http.build();
+}
+```
+
+* I use wilcards (**) in the URLs so that the security is applied to all URLs which match that pattern!
+
+* I verify that I am only able to delete employees with Susan's login details!
