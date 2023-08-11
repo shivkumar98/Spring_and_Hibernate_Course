@@ -136,3 +136,11 @@ public class DemoSecurityConfig {
 
 }
 ```
+
+* I use Postman to make a get request for the employees and use basic authentication to provide my login details:
+
+![](screenshots/2023-08-11-15-06-12.png)
+
+* I successfully get a JSON response with the employees table!
+
+* I obtain the same result when using susan or mary's login!
